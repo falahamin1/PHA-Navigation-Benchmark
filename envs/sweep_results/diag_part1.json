@@ -1,0 +1,10 @@
+{
+  "train_solve_rate": 0.2236453201970443,
+  "test_solve_rate": 0.1442,
+  "random_solve_rate": 0.3105090311986864,
+  "entropy_grad_norm": 11.320255077444017,
+  "policy_grad_norm": 122.77633401751518,
+  "grad_ratio": 0.0922022567951009,
+  "curve_slope_last3": -0.0005333333333333335,
+  "fork": "OPTIMIZATION_FAILURE"
+}
