@@ -7,14 +7,14 @@
 # estimate and resume behaviour (both apply identically here).
 
 #SBATCH --nodes=1
-#SBATCH --time=48:00:00
-#SBATCH --partition=amilan
+#SBATCH --time=24:00:00
+#SBATCH --partition=acpu
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=20G
 #SBATCH --job-name=nav-cal-easy-hrep-e01
 #SBATCH --output=nav-cal-easy-hrep-e01.%j.out
-#SBATCH --qos=normal
+#SBATCH --qos=cpu-normal
 
 module purge
 module load anaconda

@@ -10,24 +10,30 @@
 # rough floor, not a promise):
 #   ~7-8s/iteration training + ~1 eval checkpoint (203 instances x2 modes
 #   x10 resets) roughly every 8-10 min of training time at --eval-every=100.
-#   5000 iterations => very roughly 12-20h depending on node speed.
-#   Wall time set to 48h as a safety buffer.
+#   5000 iterations => very roughly 12-20h depending on node speed -- may
+#   exceed one 24h window.
+#
+# QoS cap: the 'normal' (soon 'cpu-normal') QoS on this partition caps
+# runtime at 24h, so --time is set to the max allowed, not a real estimate
+# of total need. If 5000 iterations takes longer than 24h, the job hits the
+# wall and stops mid-run -- that's expected, not a failure.
 #
 # Resume behaviour (same convention as tangram-git/jobs/hrep.slurm):
-#   If the job times out or crashes, just resubmit this exact script.
-#   calibrate_cluster.py resumes automatically from
-#   calibration_results/easy_hrep_entropy0.05_seed0_checkpoint.pt and
-#   appends to the existing *_curve.json rather than overwriting it.
+#   If the job times out or crashes (including hitting the 24h wall above),
+#   just resubmit this exact script. calibrate_cluster.py resumes
+#   automatically from calibration_results/easy_hrep_entropy0.05_seed0_checkpoint.pt
+#   and appends to the existing *_curve.json rather than overwriting it --
+#   spanning several 24h submissions to reach 5000 iterations is normal.
 
 #SBATCH --nodes=1
-#SBATCH --time=48:00:00
-#SBATCH --partition=amilan
+#SBATCH --time=24:00:00
+#SBATCH --partition=acpu
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=20G
 #SBATCH --job-name=nav-cal-easy-hrep-e05
 #SBATCH --output=nav-cal-easy-hrep-e05.%j.out
-#SBATCH --qos=normal
+#SBATCH --qos=cpu-normal
 
 module purge
 module load anaconda

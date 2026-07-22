@@ -20,17 +20,23 @@ greedy_solve, stochastic_solve, elapsed_s) and `<run_tag>_checkpoint.pt`
 ### Before submitting
 
 1. **Edit `WORK_DIR`** at the top of each script to wherever this repo
-   actually lives on Alpine (currently a placeholder:
-   `/projects/amfa5003/nav-benchmark/Nav-Benchmark/envs`).
+   actually lives on Alpine.
 2. **Run `acompile` first.** `sbatch` inherits `MODULEPATH` from the shell
    you call it from — on the plain login node `module load anaconda` isn't
    visible there, so the job dies in under a second. This bit Rush-Hour's
    array jobs too; see `Rush-hour-git/jobs/submit_arrays.sh`'s header.
-3. Confirm the `amfa-custom-env` conda environment on Alpine has this
+3. **Partition/QoS naming and the 24h cap.** Both scripts use
+   `--partition=acpu`/`--qos=cpu-normal` (Alpine's renamed `amilan`/`normal`,
+   already accepted ahead of the Aug 5 2026 cutover). `cpu-normal` caps
+   runtime at 24h — `--time=24:00:00` is the max allowed, not a real estimate
+   of total need for 5000 iterations. If a job hits the wall before finishing,
+   that's expected: just resubmit (see below) and it resumes from checkpoint,
+   spanning as many 24h submissions as it takes.
+4. Confirm the `amfa-custom-env` conda environment on Alpine has this
    benchmark's dependencies (`gymnasium`, `torch`, `scipy` for
    `Voronoi`/`ConvexHull`) — it should already, since Tangram/Rush-Hour jobs
    use the same env, but this benchmark is new.
-4. **Pool provenance — confirm the job trains on the same pool as your
+5. **Pool provenance — confirm the job trains on the same pool as your
    laptop, not a fresh regeneration that happens to differ.** `calibrate_cluster.py`
    now logs this at startup (`[pool] tier=easy n_train=... n_test=...
    train_fp=... test_fp=...`) and stores it in `<run_tag>_curve.json`'s
