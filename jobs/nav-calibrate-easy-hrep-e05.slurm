@@ -36,7 +36,7 @@ source "$(conda info --base)/etc/profile.d/conda.sh"
 conda activate amfa-custom-env
 
 # Adjust WORK_DIR to wherever Nav-Benchmark actually lives on Alpine.
-WORK_DIR="/projects/amfa5003/nav-benchmark/Nav-Benchmark/envs"
+WORK_DIR="/projects/amfa5003/PHA-Navigation-Benchmark/envs"
 cd "$WORK_DIR"
 
 python3 calibrate_cluster.py \
