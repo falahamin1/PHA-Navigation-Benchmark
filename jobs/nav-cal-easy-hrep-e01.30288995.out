@@ -1,0 +1,75 @@
+usage: conda [-h] [--no-plugins] [-V] COMMAND ...
+conda: error: argument COMMAND: invalid choice: 'deactivate' (choose from 'clean', 'compare', 'config', 'create', 'info', 'init', 'install', 'list', 'notices', 'package', 'remove', 'uninstall', 'rename', 'run', 'search', 'update', 'upgrade', 'build', 'content-trust', 'convert', 'debug', 'develop', 'doctor', 'index', 'inspect', 'metapackage', 'render', 'skeleton', 'env', 'server', 'pack', 'repo', 'token', 'verify')
+usage: conda [-h] [--no-plugins] [-V] COMMAND ...
+conda: error: argument COMMAND: invalid choice: 'deactivate' (choose from 'clean', 'compare', 'config', 'create', 'info', 'init', 'install', 'list', 'notices', 'package', 'remove', 'uninstall', 'rename', 'run', 'search', 'update', 'upgrade', 'build', 'content-trust', 'convert', 'debug', 'develop', 'doctor', 'index', 'inspect', 'metapackage', 'render', 'skeleton', 'server', 'repo', 'env', 'verify', 'pack', 'token')
+[pool] tier=easy n_train=812 n_test=203 train_fp=5273f45be21869b2 test_fp=601ae1a38f60f29f
+[start] run_tag=easy_hrep_entropy0.01_seed0 start_iteration=0 n_iterations=5000
+[checkpoint] iter=  100 entropy=0.4236 greedy=14.04% stochastic=18.42% gap=+4.38% elapsed=1883s
+[checkpoint] iter=  200 entropy=0.1304 greedy=14.33% stochastic=16.60% gap=+2.27% elapsed=3446s
+[checkpoint-saved] iter=250
+[checkpoint] iter=  300 entropy=0.1113 greedy=14.33% stochastic=15.47% gap=+1.13% elapsed=5010s
+[checkpoint] iter=  400 entropy=1.6516 greedy=28.92% stochastic=31.08% gap=+2.17% elapsed=6442s
+[checkpoint] iter=  500 entropy=1.6262 greedy=10.79% stochastic=30.05% gap=+19.26% elapsed=8665s
+[checkpoint-saved] iter=500
+[checkpoint] iter=  600 entropy=1.4864 greedy=12.96% stochastic=25.52% gap=+12.56% elapsed=11696s
+[checkpoint] iter=  700 entropy=1.2273 greedy=22.36% stochastic=24.83% gap=+2.46% elapsed=13332s
+[checkpoint-saved] iter=750
+[checkpoint] iter=  800 entropy=1.7868 greedy=7.39% stochastic=30.79% gap=+23.40% elapsed=15576s
+[checkpoint] iter=  900 entropy=1.0103 greedy=15.47% stochastic=23.20% gap=+7.73% elapsed=17195s
+[checkpoint] iter= 1000 entropy=1.8941 greedy=14.09% stochastic=32.32% gap=+18.23% elapsed=18746s
+[checkpoint-saved] iter=1000
+[checkpoint] iter= 1100 entropy=1.6545 greedy=18.18% stochastic=29.70% gap=+11.53% elapsed=20752s
+[checkpoint] iter= 1200 entropy=1.8220 greedy=9.16% stochastic=28.33% gap=+19.16% elapsed=22900s
+[checkpoint-saved] iter=1250
+[checkpoint] iter= 1300 entropy=1.6545 greedy=9.16% stochastic=31.13% gap=+21.97% elapsed=25059s
+[checkpoint] iter= 1400 entropy=1.5365 greedy=15.27% stochastic=30.44% gap=+15.17% elapsed=27149s
+[checkpoint] iter= 1500 entropy=1.5361 greedy=15.47% stochastic=28.37% gap=+12.91% elapsed=28705s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1600 entropy=0.3419 greedy=15.76% stochastic=18.92% gap=+3.15% elapsed=30742s
+[checkpoint] iter= 1700 entropy=0.8917 greedy=15.76% stochastic=23.60% gap=+7.83% elapsed=32627s
+[checkpoint-saved] iter=1750
+[checkpoint] iter= 1800 entropy=1.9159 greedy=28.77% stochastic=30.54% gap=+1.77% elapsed=34134s
+[checkpoint] iter= 1900 entropy=1.8856 greedy=19.85% stochastic=32.91% gap=+13.05% elapsed=35905s
+[checkpoint] iter= 2000 entropy=1.9357 greedy=17.88% stochastic=34.33% gap=+16.45% elapsed=37428s
+[checkpoint-saved] iter=2000
+[checkpoint] iter= 2100 entropy=1.8773 greedy=23.10% stochastic=35.32% gap=+12.22% elapsed=39348s
+[checkpoint] iter= 2200 entropy=1.9467 greedy=22.32% stochastic=36.55% gap=+14.24% elapsed=41046s
+[checkpoint-saved] iter=2250
+[checkpoint] iter= 2300 entropy=1.8137 greedy=35.71% stochastic=37.98% gap=+2.27% elapsed=42681s
+[checkpoint] iter= 2400 entropy=1.7604 greedy=23.45% stochastic=42.51% gap=+19.06% elapsed=44662s
+[checkpoint] iter= 2500 entropy=1.8057 greedy=32.96% stochastic=41.82% gap=+8.87% elapsed=46716s
+[checkpoint-saved] iter=2500
+[checkpoint] iter= 2600 entropy=1.8537 greedy=38.97% stochastic=47.64% gap=+8.67% elapsed=48497s
+[checkpoint] iter= 2700 entropy=1.7661 greedy=34.63% stochastic=48.13% gap=+13.50% elapsed=50160s
+[checkpoint-saved] iter=2750
+[checkpoint] iter= 2800 entropy=1.5061 greedy=31.63% stochastic=50.44% gap=+18.82% elapsed=51802s
+[checkpoint] iter= 2900 entropy=1.6123 greedy=37.29% stochastic=49.70% gap=+12.41% elapsed=53526s
+[checkpoint] iter= 3000 entropy=1.4731 greedy=33.99% stochastic=52.36% gap=+18.37% elapsed=55457s
+[checkpoint-saved] iter=3000
+[checkpoint] iter= 3100 entropy=1.5727 greedy=44.63% stochastic=53.20% gap=+8.57% elapsed=57240s
+[checkpoint] iter= 3200 entropy=1.6295 greedy=39.70% stochastic=54.48% gap=+14.78% elapsed=59178s
+[checkpoint-saved] iter=3250
+[checkpoint] iter= 3300 entropy=1.4719 greedy=43.50% stochastic=59.41% gap=+15.91% elapsed=61085s
+[checkpoint] iter= 3400 entropy=1.5338 greedy=54.43% stochastic=58.28% gap=+3.84% elapsed=62745s
+[checkpoint] iter= 3500 entropy=1.3996 greedy=55.22% stochastic=61.87% gap=+6.65% elapsed=64311s
+[checkpoint-saved] iter=3500
+[checkpoint] iter= 3600 entropy=1.4680 greedy=53.99% stochastic=60.44% gap=+6.45% elapsed=65902s
+[checkpoint] iter= 3700 entropy=1.4760 greedy=47.64% stochastic=60.30% gap=+12.66% elapsed=67754s
+[checkpoint-saved] iter=3750
+[checkpoint] iter= 3800 entropy=1.3471 greedy=47.93% stochastic=63.99% gap=+16.06% elapsed=69485s
+[checkpoint] iter= 3900 entropy=1.3546 greedy=58.47% stochastic=63.30% gap=+4.83% elapsed=71024s
+[checkpoint] iter= 4000 entropy=1.1855 greedy=58.57% stochastic=65.91% gap=+7.34% elapsed=72471s
+[checkpoint-saved] iter=4000
+[checkpoint] iter= 4100 entropy=1.1286 greedy=52.76% stochastic=62.12% gap=+9.36% elapsed=74005s
+[checkpoint] iter= 4200 entropy=1.4206 greedy=55.52% stochastic=66.01% gap=+10.49% elapsed=75550s
+[checkpoint-saved] iter=4250
+[checkpoint] iter= 4300 entropy=1.2308 greedy=58.33% stochastic=67.68% gap=+9.36% elapsed=76967s
+[checkpoint] iter= 4400 entropy=1.2347 greedy=59.90% stochastic=68.82% gap=+8.92% elapsed=78521s
+[checkpoint] iter= 4500 entropy=1.2434 greedy=57.88% stochastic=68.92% gap=+11.03% elapsed=80066s
+[checkpoint-saved] iter=4500
+[checkpoint] iter= 4600 entropy=1.3354 greedy=58.87% stochastic=70.99% gap=+12.12% elapsed=81579s
+[checkpoint] iter= 4700 entropy=1.1911 greedy=58.13% stochastic=68.72% gap=+10.59% elapsed=83090s
+[checkpoint-saved] iter=4750
+[checkpoint] iter= 4800 entropy=1.3241 greedy=62.81% stochastic=72.02% gap=+9.21% elapsed=84530s
+[checkpoint] iter= 4900 entropy=1.3033 greedy=68.52% stochastic=72.02% gap=+3.50% elapsed=85914s
+slurmstepd: error: *** JOB 30288995 ON c3cpu-c11-u17-3 CANCELLED AT 2026-07-23T11:35:12 DUE TO TIME LIMIT ***

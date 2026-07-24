@@ -1,0 +1,43 @@
+usage: conda [-h] [--no-plugins] [-V] COMMAND ...
+conda: error: argument COMMAND: invalid choice: 'deactivate' (choose from 'clean', 'compare', 'config', 'create', 'info', 'init', 'install', 'list', 'notices', 'package', 'remove', 'uninstall', 'rename', 'run', 'search', 'update', 'upgrade', 'build', 'content-trust', 'convert', 'debug', 'develop', 'doctor', 'index', 'inspect', 'metapackage', 'render', 'skeleton', 'repo', 'pack', 'token', 'verify', 'server', 'env')
+usage: conda [-h] [--no-plugins] [-V] COMMAND ...
+conda: error: argument COMMAND: invalid choice: 'deactivate' (choose from 'clean', 'compare', 'config', 'create', 'info', 'init', 'install', 'list', 'notices', 'package', 'remove', 'uninstall', 'rename', 'run', 'search', 'update', 'upgrade', 'build', 'content-trust', 'convert', 'debug', 'develop', 'doctor', 'index', 'inspect', 'metapackage', 'render', 'skeleton', 'env', 'server', 'pack', 'verify', 'token', 'repo')
+[pool] tier=easy n_train=812 n_test=203 train_fp=5273f45be21869b2 test_fp=601ae1a38f60f29f
+[start] run_tag=easy_hrep_entropy0.05_seed0 start_iteration=0 n_iterations=5000
+[checkpoint] iter=  100 entropy=1.8508 greedy=20.44% stochastic=30.94% gap=+10.49% elapsed=2357s
+[checkpoint] iter=  200 entropy=1.8913 greedy=18.18% stochastic=31.38% gap=+13.20% elapsed=24605s
+[checkpoint-saved] iter=250
+[checkpoint] iter=  300 entropy=1.7407 greedy=21.18% stochastic=30.15% gap=+8.97% elapsed=26314s
+[checkpoint] iter=  400 entropy=1.9197 greedy=14.58% stochastic=32.41% gap=+17.83% elapsed=29043s
+[checkpoint] iter=  500 entropy=1.8434 greedy=17.88% stochastic=32.32% gap=+14.43% elapsed=30664s
+[checkpoint-saved] iter=500
+[checkpoint] iter=  600 entropy=1.9252 greedy=23.10% stochastic=31.03% gap=+7.93% elapsed=32361s
+[checkpoint] iter=  700 entropy=1.8555 greedy=16.35% stochastic=32.81% gap=+16.45% elapsed=38465s
+[checkpoint-saved] iter=750
+[checkpoint] iter=  800 entropy=1.9038 greedy=17.39% stochastic=29.16% gap=+11.77% elapsed=40291s
+[checkpoint] iter=  900 entropy=1.9820 greedy=18.82% stochastic=30.59% gap=+11.77% elapsed=42277s
+[checkpoint] iter= 1000 entropy=1.9236 greedy=18.82% stochastic=30.15% gap=+11.33% elapsed=46538s
+[checkpoint-saved] iter=1000
+[checkpoint] iter= 1100 entropy=1.9700 greedy=12.96% stochastic=28.57% gap=+15.62% elapsed=50135s
+[checkpoint] iter= 1200 entropy=1.8858 greedy=23.15% stochastic=32.07% gap=+8.92% elapsed=52455s
+[checkpoint-saved] iter=1250
+[checkpoint] iter= 1300 entropy=1.9652 greedy=14.58% stochastic=32.07% gap=+17.49% elapsed=54274s
+[checkpoint] iter= 1400 entropy=2.0200 greedy=32.36% stochastic=34.14% gap=+1.77% elapsed=57322s
+[checkpoint] iter= 1500 entropy=1.9432 greedy=20.64% stochastic=34.14% gap=+13.50% elapsed=64475s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1600 entropy=1.9651 greedy=36.95% stochastic=32.51% gap=-4.43% elapsed=66130s
+[checkpoint] iter= 1700 entropy=1.9910 greedy=22.36% stochastic=33.20% gap=+10.84% elapsed=70288s
+[checkpoint-saved] iter=1750
+[checkpoint] iter= 1800 entropy=1.9477 greedy=25.76% stochastic=35.86% gap=+10.10% elapsed=72196s
+[checkpoint] iter= 1900 entropy=1.9189 greedy=43.30% stochastic=38.52% gap=-4.78% elapsed=73849s
+[checkpoint] iter= 2000 entropy=1.9178 greedy=28.82% stochastic=39.11% gap=+10.30% elapsed=75530s
+[checkpoint-saved] iter=2000
+[checkpoint] iter= 2100 entropy=1.8988 greedy=29.95% stochastic=43.30% gap=+13.35% elapsed=77234s
+[checkpoint] iter= 2200 entropy=1.9147 greedy=26.75% stochastic=43.00% gap=+16.26% elapsed=79073s
+[checkpoint-saved] iter=2250
+[checkpoint] iter= 2300 entropy=1.8806 greedy=36.40% stochastic=45.02% gap=+8.62% elapsed=80667s
+[checkpoint] iter= 2400 entropy=1.7875 greedy=27.64% stochastic=45.17% gap=+17.54% elapsed=82829s
+[checkpoint] iter= 2500 entropy=1.8205 greedy=33.60% stochastic=48.62% gap=+15.02% elapsed=84662s
+[checkpoint-saved] iter=2500
+[checkpoint] iter= 2600 entropy=1.8754 greedy=39.26% stochastic=49.56% gap=+10.30% elapsed=86260s
+slurmstepd: error: *** JOB 30288994 ON c3cpu-c11-u7-2 CANCELLED AT 2026-07-23T11:35:12 DUE TO TIME LIMIT ***
