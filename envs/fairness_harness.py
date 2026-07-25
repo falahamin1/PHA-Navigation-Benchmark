@@ -199,6 +199,49 @@ def get_final_pool(tier: str):
     return train, test
 
 
+# Reference (train_fingerprint, test_fingerprint) pairs for the canonical,
+# already-cached pool of each tier -- computed once locally via
+# get_final_pool(tier) + pool_fingerprint(...) and pinned here so any cluster
+# job (calibration or sweep) can assert its pool matches this laptop's,
+# rather than silently training on a fresh regeneration that happens to
+# differ. EASY's pair is the one jobs/README.md already documents and the
+# calibration jobs already verified against; MEDIUM/HARD were computed the
+# same way for the reduced sweep's precondition. Do not update these values
+# without regenerating pool_cache/*.pkl deliberately -- a change here should
+# only ever follow an intentional pool change, never "fix" a real mismatch by
+# overwriting the reference with whatever the job produced.
+REFERENCE_POOL_FINGERPRINTS = {
+    "easy": {"train": "5273f45be21869b2", "test": "601ae1a38f60f29f"},
+    "medium": {"train": "46cc988a095f337b", "test": "1c494eb02a001f06"},
+    "hard": {"train": "764cc4977f8b6665", "test": "9516aee04fea91a8"},
+}
+
+
+def verify_pool_fingerprint(tier: str, train_instances, test_instances) -> Dict[str, str]:
+    """Computes (train, test) fingerprints for the given instances and
+    raises RuntimeError immediately if either disagrees with
+    REFERENCE_POOL_FINGERPRINTS[tier] -- the "fails loudly before any
+    training" precondition for cluster jobs. Returns the pool_provenance
+    dict (also used as the curve/result file's provenance record) on
+    success."""
+    train_fp, test_fp = pool_fingerprint(train_instances), pool_fingerprint(test_instances)
+    ref = REFERENCE_POOL_FINGERPRINTS.get(tier)
+    if ref is None:
+        raise RuntimeError(f"no reference fingerprint recorded for tier={tier!r} -- add it to "
+                            "REFERENCE_POOL_FINGERPRINTS before running cluster jobs on this tier")
+    if train_fp != ref["train"] or test_fp != ref["test"]:
+        raise RuntimeError(
+            f"POOL FINGERPRINT MISMATCH for tier={tier!r}: got train={train_fp} test={test_fp}, "
+            f"expected train={ref['train']} test={ref['test']}. This job's pool differs from the "
+            "reference pool (see jobs/README.md) -- do not train on it. Check pool_cache/ provenance "
+            "before resubmitting."
+        )
+    return {
+        "tier": tier, "n_train": len(train_instances), "n_test": len(test_instances),
+        "train_fingerprint": train_fp, "test_fingerprint": test_fp,
+    }
+
+
 def pool_fingerprint(instances) -> str:
     """Deterministic SHA-256 fingerprint (first 16 hex chars) over an
     ordered instance list. NOT Python's built-in hash() -- that's salted per
