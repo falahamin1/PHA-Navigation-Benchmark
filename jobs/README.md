@@ -47,9 +47,21 @@ greedy_solve, stochastic_solve, elapsed_s) and `<run_tag>_checkpoint.pt`
    Python's salted `hash()` — stable across machines/processes):
 
    ```
-   EASY train: 812 instances, fingerprint 5273f45be21869b2
-   EASY test:  203 instances, fingerprint 601ae1a38f60f29f
+   EASY   train: 812 instances, fingerprint 5273f45be21869b2
+   EASY   test:  203 instances, fingerprint 601ae1a38f60f29f
+   MEDIUM train: 708 instances, fingerprint 46cc988a095f337b
+   MEDIUM test:  175 instances, fingerprint 1c494eb02a001f06
+   HARD   train: 694 instances, fingerprint 764cc4977f8b6665
+   HARD   test:  168 instances, fingerprint 9516aee04fea91a8
    ```
+
+   MEDIUM/HARD were computed the same way as EASY (`get_final_pool(tier)` +
+   `pool_fingerprint(...)`, both in `fairness_harness.py`) and are pinned in
+   code as `fairness_harness.REFERENCE_POOL_FINGERPRINTS`. The reduced-sweep
+   jobs (below) call `verify_pool_fingerprint(tier, ...)` automatically at
+   startup and abort before training on any mismatch -- unlike the
+   calibration jobs above, which only print the fingerprint for a human to
+   compare by eye.
 
    **Safest option:** copy `envs/pool_cache/easy_pool.pkl` from your laptop
    to the same relative path on Alpine, so the job *loads* the pool instead
@@ -88,10 +100,76 @@ Send back both `calibration_results/easy_hrep_entropy*_seed0_curve.json`
 files — that's all that's needed to build the three-curve convergence plot
 and the entropy comparison.
 
-## Step 5b sweep (next, after calibration gates clean)
+## Step 5b reduced sweep (current -- AAAI submission)
+
+Calibration's conclusion: **entropy_coef=0.01**, uniform across every
+encoder/tier. At 0.05 the policy stayed pinned near maximum entropy
+(~1.9-2.0) for its entire 2600-iteration run and never sharpened; at 0.01
+entropy decayed and greedy/stochastic solve rates climbed to 68.5%/72.0% by
+iteration 4900 (see `calibration_results/easy_hrep_entropy*_seed0_curve.
+json`). 0.05 is dead; do not re-open it.
+
+This is the real run for the paper, not another calibration -- **90 runs**
+(6 encoders x 3 tiers x **5 seeds**, not the 180-run/10-seed design
+`envs/launch_sweep.py` was built for; that scaffold is untouched and still
+the eventual full sweep once bandwidth allows). Fixed for every run:
+entropy_coef=0.01, 3000-iteration budget (iterations, not wall-clock --
+different encoders do different iterations/hour, so a wall-clock-fixed
+budget would be an unfair comparison), both eval modes logged every
+checkpoint.
+
+**Code**: `envs/launch_reduced_sweep.py` (array_index -> (encoder, seed)
+within a tier, 30 tasks/tier -- `python envs/launch_reduced_sweep.py` prints
+the full 90-row mapping) and `envs/sweep_cluster.py` (the actual per-task
+entry point `jobs/nav-sweep-*.slurm` call). `sweep_cluster.py`:
+
+- Verifies the tier's pool fingerprint against
+  `fairness_harness.REFERENCE_POOL_FINGERPRINTS` before any training and
+  raises immediately on mismatch (the fingerprints recorded above).
+- Checkpoints (model/optimizer/RNG state) and a progress curve every 300
+  iterations by default; resuming (rerun the identical command -- the
+  Slurm scripts already do this on resubmit) continues from the last
+  checkpoint's iteration/episode_count, same contract as
+  `calibrate_cluster.py`. If the tagged result file already exists, the
+  task is a no-op -- safe to resubmit an array after it's fully finished.
+- Logs entropy + greedy + stochastic solve rate at every checkpoint (a
+  sampled 100-instance subset for cheap intermediate checkpoints, the full
+  held-out set for the last 2 checkpoints and always at iteration 3000) --
+  the three-curve record, not just an aggregate.
+- Writes `sweep_results/<tier>_<encoder>_seed<seed>.json`: the curve, full
+  per-instance held-out outcomes for both eval modes (from the iteration-
+  3000 full eval), the frozen config (including `commit_hash`, via `git
+  rev-parse HEAD`), and pool provenance -- the schema the statistics module
+  consumes.
+
+### Submit
+
+Three per-tier arrays, 30 tasks each (`--array=0-29`):
+
+```bash
+sbatch jobs/nav-sweep-easy.slurm
+sbatch jobs/nav-sweep-medium.slurm
+sbatch jobs/nav-sweep-hard.slurm
+```
+
+Same preconditions as the calibration jobs above: run `acompile` first,
+edit `WORK_DIR` if needed, confirm `amfa-custom-env` has this benchmark's
+deps. Monitor with `squeue -u $USER`. A task that hits the 24h wall before
+reaching 3000 iterations is expected, not a failure -- resubmitting the same
+array (`sbatch jobs/nav-sweep-<tier>.slurm`) resumes every still-incomplete
+task from its checkpoint and is a no-op for any task that already finished.
+
+### Getting results back
+
+Send back `sweep_results/*.json` (all 90, or however many have completed --
+but per the launch prompt, do not interpret partial results mid-sweep; the
+statistics module runs once all three arrays are fully done).
+
+## Step 5b full sweep (later, if the reduced sweep isn't enough)
 
 The 180-run array (6 encoders x 3 tiers x 10 seeds) is built and tested
 locally (`envs/launch_sweep.py`, `envs/fairness_harness.py`,
 `envs/test_fairness_harness.py`) but not yet turned into `.slurm` files here
--- that's the next step once the calibrated budget/entropy are frozen from
-this calibration's results.
+-- this is the larger design the reduced sweep above was cut down from, kept
+around in case 5 seeds/encoder turns out not to be enough statistical power
+for the paper.

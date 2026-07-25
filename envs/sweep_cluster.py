@@ -98,7 +98,14 @@ def _paths(output_dir, tier, encoder, seed):
 
 
 def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
-        eval_every=DEFAULT_EVAL_EVERY, checkpoint_every=DEFAULT_CHECKPOINT_EVERY, verbose=True):
+        eval_every=DEFAULT_EVAL_EVERY, checkpoint_every=DEFAULT_CHECKPOINT_EVERY, verbose=True,
+        config_overrides=None, eval_sample_size=INTERMEDIATE_EVAL_SAMPLE_SIZE,
+        intermediate_eval_resets=INTERMEDIATE_EVAL_RESETS):
+    """config_overrides/eval_sample_size/intermediate_eval_resets exist for
+    tests only (shrink steps_per_iter/n_eval_resets/sample size so a smoke
+    run finishes in seconds) -- real sweep tasks never pass them, so
+    entropy_coef/n_iterations stay the only per-run knobs, matching the
+    frozen-config requirement."""
     if encoder not in ENCODER_REGISTRY:
         raise ValueError(f"unknown encoder {encoder!r}, must be one of {list(ENCODER_REGISTRY)}")
 
@@ -117,7 +124,8 @@ def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
         with open(final_path) as f:
             return json.load(f)
 
-    cfg = {**FROZEN_CONFIG, "entropy_coef": SWEEP_ENTROPY_COEF, "n_iterations": n_iterations}
+    cfg = {**FROZEN_CONFIG, "entropy_coef": SWEEP_ENTROPY_COEF, "n_iterations": n_iterations,
+           **(config_overrides or {})}
     commit_hash = _git_commit_hash()
     partition_cache = {}
 
@@ -261,9 +269,9 @@ def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
                 eval_instances, n_resets = test_instances, cfg["n_eval_resets"]
             else:
                 rng = np.random.default_rng(999)
-                sample_n = min(INTERMEDIATE_EVAL_SAMPLE_SIZE, len(test_instances))
+                sample_n = min(eval_sample_size, len(test_instances))
                 idx = rng.choice(len(test_instances), size=sample_n, replace=False)
-                eval_instances, n_resets = [test_instances[i] for i in idx], INTERMEDIATE_EVAL_RESETS
+                eval_instances, n_resets = [test_instances[i] for i in idx], intermediate_eval_resets
 
             greedy_eval = _evaluate(model, tier, eval_instances, partition_cache,
                                      n_resets=n_resets, horizon=cfg["horizon"], mode="greedy")
