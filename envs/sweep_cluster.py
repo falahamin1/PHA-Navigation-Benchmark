@@ -49,6 +49,7 @@ from fairness_harness import (
     RESULTS_DIR,
     _episode_assignment,
     _evaluate,
+    _is_sim_violation,
     get_final_pool,
     verify_pool_fingerprint,
 )
@@ -74,6 +75,17 @@ N_FULL_EVAL_CHECKPOINTS = 2
 INTERMEDIATE_EVAL_SAMPLE_SIZE = 100
 INTERMEDIATE_EVAL_RESETS = 10
 
+# See fairness_harness._is_sim_violation's comment for the full story: a rare
+# but real skipped-cell physics edge case, much more frequent on MEDIUM/HARD
+# than EASY, that the frozen env raises as a hard AssertionError. Harness-
+# level fix (this sweep's decision, not a dt/drift_coupling change): treat
+# the training step that triggered it as an ordinary terminal transition
+# with a hazard-sized penalty, then start a fresh episode. SIM_VIOLATION_
+# REWARD mirrors nav_env.py's STEP_PENALTY + HAZARD_REWARD (no shaping term
+# -- the position at the moment of violation isn't a trustworthy point to
+# potential-shape from).
+SIM_VIOLATION_REWARD = -0.01 + -10.0
+
 
 def _git_commit_hash():
     try:
@@ -82,6 +94,10 @@ def _git_commit_hash():
         ).decode().strip()
     except Exception:
         return None
+
+
+def _count_sim_violations(per_instance_eval):
+    return sum(o == "sim_violation" for v in per_instance_eval.values() for o in v["outcomes"])
 
 
 def _run_tag(tier, encoder, seed):
@@ -141,8 +157,10 @@ def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
 
     start_iteration = 0
     episode_count = 0
+    train_sim_violations = 0
     curve = {"iteration": [], "entropy": [], "greedy_solve": [], "stochastic_solve": [],
-             "n_eval_instances": [], "elapsed_s": [], "pool_provenance": pool_provenance}
+             "n_eval_instances": [], "elapsed_s": [], "train_sim_violations": [], "eval_sim_violations": [],
+             "pool_provenance": pool_provenance}
 
     if os.path.exists(ckpt_path):
         ckpt = torch.load(ckpt_path, map_location="cpu")
@@ -151,8 +169,9 @@ def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
         action_gen.set_state(ckpt["action_gen_state"])
         start_iteration = ckpt["iteration"]
         episode_count = ckpt["episode_count"]
+        train_sim_violations = ckpt.get("sim_violation_count", 0)
         print(f"[resume] {run_tag} loaded checkpoint at iteration={start_iteration}, "
-              f"episode_count={episode_count}", flush=True)
+              f"episode_count={episode_count}, train_sim_violations={train_sim_violations}", flush=True)
     if os.path.exists(progress_path):
         with open(progress_path) as f:
             curve = json.load(f)
@@ -164,6 +183,10 @@ def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
                 "Do not continue -- investigate pool_cache/ provenance before resubmitting."
             )
         curve["pool_provenance"] = pool_provenance
+        # Backward-compat: a progress file written before sim_violation
+        # tracking existed won't have these keys.
+        curve.setdefault("train_sim_violations", [])
+        curve.setdefault("eval_sim_violations", [])
 
     def new_env():
         nonlocal episode_count
@@ -204,7 +227,18 @@ def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
             buf_logp.append(log_prob.detach())
             buf_val.append(value.detach())
 
-            obs, reward, terminated, truncated, info = env.step(int(action.item()))
+            try:
+                obs, reward, terminated, truncated, info = env.step(int(action.item()))
+            except AssertionError as e:
+                if not _is_sim_violation(e):
+                    raise
+                # env's internal state is now inconsistent (position moved
+                # past a cell boundary before the check fired) -- do not
+                # reuse it. Treat this step as an ordinary hazard-like
+                # terminal transition and let the normal new_env() call
+                # below start a clean episode.
+                train_sim_violations += 1
+                reward, terminated, truncated = SIM_VIOLATION_REWARD, True, False
             buf_reward.append(reward)
             buf_done.append(terminated or truncated)
 
@@ -280,6 +314,7 @@ def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
                                          stochastic_rng=np.random.default_rng((seed, it1)))
             greedy_rate = float(np.mean([v["solve_rate"] for v in greedy_eval.values()]))
             stochastic_rate = float(np.mean([v["solve_rate"] for v in stochastic_eval.values()]))
+            eval_violations = _count_sim_violations(greedy_eval) + _count_sim_violations(stochastic_eval)
             elapsed = time.time() - t_start
 
             curve["iteration"].append(it1)
@@ -288,6 +323,8 @@ def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
             curve["stochastic_solve"].append(stochastic_rate)
             curve["n_eval_instances"].append(len(eval_instances))
             curve["elapsed_s"].append(elapsed)
+            curve["train_sim_violations"].append(train_sim_violations)
+            curve["eval_sim_violations"].append(eval_violations)
             with open(progress_path, "w") as f:
                 json.dump(curve, f, indent=2)
 
@@ -295,7 +332,8 @@ def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
                 print(f"[checkpoint] iter={it1:5d} ({'FULL' if is_final_stretch else 'sample'} "
                       f"n={len(eval_instances)}x{n_resets}) entropy={last_entropy:.4f} "
                       f"greedy={greedy_rate:.2%} stochastic={stochastic_rate:.2%} "
-                      f"gap={stochastic_rate - greedy_rate:+.2%} elapsed={elapsed:.0f}s", flush=True)
+                      f"gap={stochastic_rate - greedy_rate:+.2%} sim_violations(train_cum={train_sim_violations}, "
+                      f"eval_this_ckpt={eval_violations}) elapsed={elapsed:.0f}s", flush=True)
 
             if is_final_stretch:
                 last_full_greedy, last_full_stochastic = greedy_eval, stochastic_eval
@@ -304,6 +342,7 @@ def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
             torch.save({
                 "model_state": model.state_dict(), "optimizer_state": optimizer.state_dict(),
                 "action_gen_state": action_gen.get_state(), "iteration": it1, "episode_count": episode_count,
+                "sim_violation_count": train_sim_violations,
             }, ckpt_path)
             print(f"[checkpoint-saved] iter={it1}", flush=True)
 
@@ -323,6 +362,7 @@ def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
                                           stochastic_rng=np.random.default_rng((seed, n_iterations)))
     aggregate_solve_rate_greedy = float(np.mean([v["solve_rate"] for v in last_full_greedy.values()]))
     aggregate_solve_rate_stochastic = float(np.mean([v["solve_rate"] for v in last_full_stochastic.values()]))
+    final_eval_sim_violations = _count_sim_violations(last_full_greedy) + _count_sim_violations(last_full_stochastic)
 
     result = {
         "tier": tier, "encoder": encoder, "seed": seed,
@@ -336,11 +376,21 @@ def run(tier, encoder, seed, output_dir, n_iterations=SWEEP_BUDGET,
         "config": {**cfg, "commit_hash": commit_hash},
         "pool_provenance": pool_provenance,
         "n_train_instances": len(train_instances), "n_test_instances": len(test_instances),
+        # See fairness_harness._is_sim_violation: count of the harness-level
+        # skipped-cell-physics catch, training-time (cumulative over the
+        # whole run) and eval-time (from this final full evaluation only).
+        # Non-zero here doesn't invalidate the run -- those episodes are
+        # already counted as not-solved in the solve rates above -- but a
+        # high count is a real signal worth surfacing to the statistics
+        # module/paper, not silently dropped.
+        "train_sim_violations": train_sim_violations,
+        "final_eval_sim_violations": final_eval_sim_violations,
     }
     with open(final_path, "w") as f:
         json.dump(result, f)
     print(f"[done] run_tag={run_tag} wrote {final_path} "
-          f"(greedy={aggregate_solve_rate_greedy:.2%}, stochastic={aggregate_solve_rate_stochastic:.2%})",
+          f"(greedy={aggregate_solve_rate_greedy:.2%}, stochastic={aggregate_solve_rate_stochastic:.2%}, "
+          f"train_sim_violations={train_sim_violations}, final_eval_sim_violations={final_eval_sim_violations})",
           flush=True)
     return result
 

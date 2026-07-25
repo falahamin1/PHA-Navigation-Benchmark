@@ -284,6 +284,29 @@ def _direction_for_hop(partition, cell_a, cell_b):
     return best_name
 
 
+# nav_env.py's NavEnv.step raises this exact AssertionError when a single
+# Euler substep displaces the agent far enough to skip clean over a cell
+# (see nav_env.py's "STEP A -- dt recalibration" docstring) -- by that
+# module's own design this is meant to be impossible under correctly-tuned
+# dt/drift_coupling, so it's a hard `assert`, not a normal env outcome.
+# Observed in practice (2026-07 reduced sweep): an RL policy explores far
+# more erratically than the closed-loop oracle dt was calibrated against,
+# and can produce transient velocity overshoot the calibration never
+# exercised -- rare on EASY (largest cells), ~23% of MEDIUM runs, ~90% of
+# HARD runs. This is a frozen-layer (dt/drift_coupling) issue; the fix
+# adopted here is harness-level, not a physics change: catch exactly this
+# assertion, record the episode as a distinct "sim_violation" outcome
+# (counts as not-solved, like hazard/timeout), and move on to a fresh
+# episode instead of losing an entire multi-hour job to one rare event.
+# Matched by message content, not just AssertionError, since nav_env.py
+# could in principle grow other asserts later that should NOT be swallowed.
+_SIM_VIOLATION_MARKER = "skipped-cell violation"
+
+
+def _is_sim_violation(exc: AssertionError) -> bool:
+    return _SIM_VIOLATION_MARKER in str(exc)
+
+
 def _evaluate(model, tier, test_instances, partition_cache, n_resets=30, horizon=40, mode="greedy",
                stochastic_rng=None):
     """Per-instance evaluation on the held-out test set, in either mode:
@@ -300,6 +323,8 @@ def _evaluate(model, tier, test_instances, partition_cache, n_resets=30, horizon
       produced a misleading below-random number).
 
     Returns {instance_key: {"outcomes": [...], "steps": [...], "solve_rate": float}}.
+    An outcome can also be "sim_violation" (see _is_sim_violation) -- treated
+    as not-solved, same as "hazard"/"timeout"/"truncated".
     """
     if mode not in ("greedy", "stochastic"):
         raise ValueError(f"mode must be 'greedy' or 'stochastic', got {mode!r}")
@@ -326,7 +351,13 @@ def _evaluate(model, tier, test_instances, partition_cache, n_resets=30, horizon
                 else:
                     probs = torch.softmax(logits, dim=-1).numpy()
                     action = int(rng.choice(len(probs), p=probs))
-                obs, _reward, terminated, truncated, info = env.step(action)
+                try:
+                    obs, _reward, terminated, truncated, info = env.step(action)
+                except AssertionError as e:
+                    if not _is_sim_violation(e):
+                        raise
+                    outcome = "sim_violation"
+                    break
                 steps += 1
                 if terminated:
                     outcome = info.get("outcome")

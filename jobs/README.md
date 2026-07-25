@@ -159,11 +159,55 @@ reaching 3000 iterations is expected, not a failure -- resubmitting the same
 array (`sbatch jobs/nav-sweep-<tier>.slurm`) resumes every still-incomplete
 task from its checkpoint and is a no-op for any task that already finished.
 
+### Known issue -- skipped-cell physics violations on MEDIUM/HARD
+
+**First real run against MEDIUM/HARD surfaced a pre-existing physics gap**:
+`nav_env.py`'s hard `assert` against skipped-cell transitions (see its "STEP
+A -- dt recalibration" docstring) fires during training/eval on these
+tiers -- 0% of EASY runs, ~23% of MEDIUM runs, ~90% of HARD runs hit it in
+the first submission. Root cause (strong hypothesis, not numerically
+proven): the prior dt=0.008 recalibration was validated against the
+closed-loop oracle's smooth, near-optimal trajectories; an RL policy
+(especially high-entropy/early-training) reverses direction far more
+erratically, and the coupled 2D velocity dynamics (`A_v` has off-diagonal
+terms) can transiently overshoot past either direction's steady-state speed
+when the input flips -- large enough to skip a cell on MEDIUM/HARD's
+smaller cells, essentially never on EASY's larger ones.
+
+This is a frozen-layer (dt/drift_coupling) issue, so per the launch prompt
+it is **not** fixed by touching `nav_env.py`/`integrator.py`. Fix adopted
+(2026-07-26, confirmed with the person running the sweep): harness-level
+catch. `fairness_harness._is_sim_violation` matches exactly this assertion's
+message; `fairness_harness._evaluate` and `sweep_cluster.py`'s training
+rollout both catch it, end that episode/decision-step with a new
+`"sim_violation"` outcome (counted as not-solved, same bucket as
+hazard/timeout/truncated), and continue -- a fresh episode for training, the
+next reset for eval. Nothing in `nav_env.py`/`integrator.py` changed.
+
+Counts are surfaced, not silently dropped: `sweep_results/*.json` now
+carries `train_sim_violations` (cumulative over the whole run) and
+`final_eval_sim_violations` (from the final full eval only), and the curve
+carries both per-checkpoint. **A run with a nonzero count is not invalid**
+-- those episodes already count as not-solved in the reported solve rates --
+but a high count relative to total episodes is a real signal worth checking
+before trusting a given (tier, encoder, seed)'s numbers, and worth a
+footnote in the paper's methodology for MEDIUM/HARD specifically.
+
+**Any array submitted before this fix landed must be resubmitted** --
+`sweep_cluster.py`'s idempotent-completion check means already-finished
+tasks (mostly EASY, which was never affected) are a no-op on resubmit, and
+failed HARD/MEDIUM tasks simply restart from iteration 0 (they crashed
+before ever reaching a checkpoint in the large majority of cases; any that
+had reached one checkpoint before failing will resume from it as normal).
+
 ### Getting results back
 
 Send back `sweep_results/*.json` (all 90, or however many have completed --
 but per the launch prompt, do not interpret partial results mid-sweep; the
-statistics module runs once all three arrays are fully done).
+statistics module runs once all three arrays are fully done). Flag any file
+with a high `train_sim_violations`/`final_eval_sim_violations` relative to
+its training length or eval sample size when handing off to the statistics
+module.
 
 ## Step 5b full sweep (later, if the reduced sweep isn't enough)
 
