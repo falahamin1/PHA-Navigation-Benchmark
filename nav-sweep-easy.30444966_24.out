@@ -1,0 +1,15 @@
+array_index=24 -> tier=easy, encoder=relational, seed=4
+[pool] tier=easy n_train=812 n_test=203 train_fp=5273f45be21869b2 test_fp=601ae1a38f60f29f
+[resume] easy_relational_seed4 loaded checkpoint at iteration=900, episode_count=10729, train_sim_violations=0
+[start] run_tag=easy_relational_seed4 start_iteration=900 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter= 1200 (sample n=100x10) entropy=1.6070 greedy=11.80% stochastic=29.90% gap=+18.10% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=14304s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=1.6821 greedy=15.50% stochastic=37.50% gap=+22.00% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=28040s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=1.4764 greedy=28.90% stochastic=40.30% gap=+11.40% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=41722s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=1.6607 greedy=29.00% stochastic=45.20% gap=+16.20% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=55586s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.7193 greedy=29.20% stochastic=45.20% gap=+16.00% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=69395s
+[checkpoint-saved] iter=2400
+slurmstepd: error: *** JOB 30444993 ON c3cpu-a2-u5-3 CANCELLED AT 2026-07-26T11:50:38 DUE TO TIME LIMIT ***

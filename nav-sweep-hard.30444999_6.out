@@ -1,0 +1,22 @@
+array_index=6 -> tier=hard, encoder=vrep, seed=1
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[start] run_tag=hard_vrep_seed1 start_iteration=0 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter=  300 (sample n=100x10) entropy=0.5737 greedy=13.10% stochastic=21.10% gap=+8.00% sim_violations(train_cum=2, eval_this_ckpt=39) elapsed=11744s
+[checkpoint-saved] iter=300
+[checkpoint] iter=  600 (sample n=100x10) entropy=0.1476 greedy=13.10% stochastic=14.50% gap=+1.40% sim_violations(train_cum=3, eval_this_ckpt=53) elapsed=23424s
+[checkpoint-saved] iter=600
+[checkpoint] iter=  900 (sample n=100x10) entropy=0.4048 greedy=13.10% stochastic=18.90% gap=+5.80% sim_violations(train_cum=3, eval_this_ckpt=58) elapsed=34444s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=0.5494 greedy=13.40% stochastic=19.10% gap=+5.70% sim_violations(train_cum=4, eval_this_ckpt=22) elapsed=43443s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=1.8797 greedy=13.40% stochastic=32.90% gap=+19.50% sim_violations(train_cum=6, eval_this_ckpt=16) elapsed=50685s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=1.5889 greedy=21.90% stochastic=31.30% gap=+9.40% sim_violations(train_cum=17, eval_this_ckpt=19) elapsed=57045s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=1.7051 greedy=16.70% stochastic=30.80% gap=+14.10% sim_violations(train_cum=22, eval_this_ckpt=11) elapsed=64379s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.7516 greedy=21.30% stochastic=34.30% gap=+13.00% sim_violations(train_cum=26, eval_this_ckpt=10) elapsed=71664s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=168x30) entropy=1.6603 greedy=18.04% stochastic=33.65% gap=+15.62% sim_violations(train_cum=32, eval_this_ckpt=43) elapsed=82730s
+[checkpoint-saved] iter=2700
+slurmstepd: error: *** JOB 30445039 ON c3cpu-c11-u34-2 CANCELLED AT 2026-07-26T11:51:08 DUE TO TIME LIMIT ***

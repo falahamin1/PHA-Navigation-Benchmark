@@ -1,0 +1,20 @@
+array_index=4 -> tier=hard, encoder=hrep, seed=4
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[start] run_tag=hard_hrep_seed4 start_iteration=0 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter=  300 (sample n=100x10) entropy=0.6521 greedy=13.90% stochastic=23.80% gap=+9.90% sim_violations(train_cum=1, eval_this_ckpt=1) elapsed=12057s
+[checkpoint-saved] iter=300
+[checkpoint] iter=  600 (sample n=100x10) entropy=0.8651 greedy=18.80% stochastic=29.80% gap=+11.00% sim_violations(train_cum=3, eval_this_ckpt=4) elapsed=22042s
+[checkpoint-saved] iter=600
+[checkpoint] iter=  900 (sample n=100x10) entropy=1.3379 greedy=18.80% stochastic=30.60% gap=+11.80% sim_violations(train_cum=7, eval_this_ckpt=12) elapsed=30200s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=1.7011 greedy=19.80% stochastic=31.50% gap=+11.70% sim_violations(train_cum=11, eval_this_ckpt=16) elapsed=38495s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=1.1632 greedy=13.40% stochastic=27.90% gap=+14.50% sim_violations(train_cum=20, eval_this_ckpt=39) elapsed=47152s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=1.3963 greedy=12.80% stochastic=26.60% gap=+13.80% sim_violations(train_cum=23, eval_this_ckpt=31) elapsed=55676s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=1.6799 greedy=18.80% stochastic=30.60% gap=+11.80% sim_violations(train_cum=25, eval_this_ckpt=14) elapsed=63668s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.6342 greedy=19.20% stochastic=36.40% gap=+17.20% sim_violations(train_cum=37, eval_this_ckpt=25) elapsed=71044s
+[checkpoint-saved] iter=2400
+slurmstepd: error: *** JOB 30445037 ON c3cpu-c11-u32-2 CANCELLED AT 2026-07-26T11:51:08 DUE TO TIME LIMIT ***

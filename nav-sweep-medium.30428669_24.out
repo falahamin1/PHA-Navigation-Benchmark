@@ -1,0 +1,13 @@
+array_index=24 -> tier=medium, encoder=relational, seed=4
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[start] run_tag=medium_relational_seed4 start_iteration=0 n_iterations=3000 entropy_coef=0.01 commit=3f465e0fb5ef34405dd42804c112fb5eb0df9a97
+Traceback (most recent call last):
+  File "/projects/amfa5003/PHA-Navigation-Benchmark/envs/sweep_cluster.py", line 373, in <module>
+    main()
+  File "/projects/amfa5003/PHA-Navigation-Benchmark/envs/sweep_cluster.py", line 368, in main
+    run(tier, encoder, seed, args.output_dir, n_iterations=args.n_iterations,
+  File "/projects/amfa5003/PHA-Navigation-Benchmark/envs/sweep_cluster.py", line 207, in run
+    obs, reward, terminated, truncated, info = env.step(int(action.item()))
+  File "/projects/amfa5003/PHA-Navigation-Benchmark/envs/nav_env.py", line 245, in step
+    assert self.partition.neighbors_adjacent(self.cell, new_cell), (
+AssertionError: skipped-cell violation: 1 -> 6 not adjacent (substep displacement too large for this cell size; retune drift_coupling/dt)

@@ -1,0 +1,24 @@
+array_index=14 -> tier=easy, encoder=mlp, seed=4
+[pool] tier=easy n_train=812 n_test=203 train_fp=5273f45be21869b2 test_fp=601ae1a38f60f29f
+[start] run_tag=easy_mlp_seed4 start_iteration=0 n_iterations=3000 entropy_coef=0.01 commit=3f465e0fb5ef34405dd42804c112fb5eb0df9a97
+[checkpoint] iter=  300 (sample n=100x10) entropy=1.9842 greedy=20.20% stochastic=31.50% gap=+11.30% elapsed=2224s
+[checkpoint-saved] iter=300
+[checkpoint] iter=  600 (sample n=100x10) entropy=1.9846 greedy=22.20% stochastic=33.30% gap=+11.10% elapsed=4496s
+[checkpoint-saved] iter=600
+[checkpoint] iter=  900 (sample n=100x10) entropy=1.9163 greedy=23.80% stochastic=32.60% gap=+8.80% elapsed=6687s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=1.9121 greedy=17.10% stochastic=32.10% gap=+15.00% elapsed=8896s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=1.9580 greedy=21.70% stochastic=31.50% gap=+9.80% elapsed=11088s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=1.9287 greedy=25.20% stochastic=31.60% gap=+6.40% elapsed=13278s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=1.9119 greedy=23.40% stochastic=31.60% gap=+8.20% elapsed=15476s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.9073 greedy=21.60% stochastic=32.90% gap=+11.30% elapsed=17682s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=203x30) entropy=1.9129 greedy=29.54% stochastic=36.58% gap=+7.04% elapsed=20691s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=203x30) entropy=1.8638 greedy=20.41% stochastic=39.59% gap=+19.18% elapsed=24130s
+[checkpoint-saved] iter=3000
+[done] run_tag=easy_mlp_seed4 wrote sweep_results/easy_mlp_seed4.json (greedy=20.41%, stochastic=39.59%)

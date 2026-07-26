@@ -1,0 +1,22 @@
+array_index=2 -> tier=easy, encoder=hrep, seed=2
+[pool] tier=easy n_train=812 n_test=203 train_fp=5273f45be21869b2 test_fp=601ae1a38f60f29f
+[start] run_tag=easy_hrep_seed2 start_iteration=0 n_iterations=3000 entropy_coef=0.01 commit=3f465e0fb5ef34405dd42804c112fb5eb0df9a97
+[checkpoint] iter=  300 (sample n=100x10) entropy=0.4450 greedy=6.10% stochastic=9.80% gap=+3.70% elapsed=5374s
+[checkpoint-saved] iter=300
+[checkpoint] iter=  600 (sample n=100x10) entropy=0.0344 greedy=6.10% stochastic=6.30% gap=+0.20% elapsed=11061s
+[checkpoint-saved] iter=600
+[checkpoint] iter=  900 (sample n=100x10) entropy=0.0228 greedy=6.10% stochastic=6.20% gap=+0.10% elapsed=16736s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=0.1138 greedy=6.10% stochastic=6.70% gap=+0.60% elapsed=22084s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=1.5332 greedy=16.20% stochastic=29.00% gap=+12.80% elapsed=26733s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=1.9046 greedy=15.70% stochastic=30.60% gap=+14.90% elapsed=31133s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=1.9478 greedy=15.60% stochastic=31.80% gap=+16.20% elapsed=35371s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.8192 greedy=15.40% stochastic=31.20% gap=+15.80% elapsed=39604s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=203x30) entropy=1.9446 greedy=42.23% stochastic=41.43% gap=-0.80% elapsed=45206s
+[checkpoint-saved] iter=2700
+slurmstepd: error: *** JOB 30428674 ON c3cpu-c13-u15-3 CANCELLED AT 2026-07-25T11:44:24 ***

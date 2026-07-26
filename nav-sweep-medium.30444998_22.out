@@ -1,0 +1,11 @@
+array_index=22 -> tier=medium, encoder=relational, seed=2
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[resume] medium_relational_seed2 loaded checkpoint at iteration=600, episode_count=6332, train_sim_violations=0
+[start] run_tag=medium_relational_seed2 start_iteration=600 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter=  900 (sample n=100x10) entropy=0.6305 greedy=11.30% stochastic=13.30% gap=+2.00% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=26579s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=0.3141 greedy=11.30% stochastic=12.20% gap=+0.90% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=52995s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=0.3855 greedy=11.30% stochastic=12.30% gap=+1.00% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=79845s
+[checkpoint-saved] iter=1500
+slurmstepd: error: *** JOB 30445026 ON c3cpu-c15-u26-3 CANCELLED AT 2026-07-26T11:51:08 DUE TO TIME LIMIT ***

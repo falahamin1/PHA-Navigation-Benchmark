@@ -1,0 +1,8 @@
+array_index=21 -> tier=easy, encoder=relational, seed=1
+[pool] tier=easy n_train=812 n_test=203 train_fp=5273f45be21869b2 test_fp=601ae1a38f60f29f
+[start] run_tag=easy_relational_seed1 start_iteration=0 n_iterations=3000 entropy_coef=0.01 commit=3f465e0fb5ef34405dd42804c112fb5eb0df9a97
+[checkpoint] iter=  300 (sample n=100x10) entropy=0.0413 greedy=15.70% stochastic=16.00% gap=+0.30% elapsed=17190s
+[checkpoint-saved] iter=300
+[checkpoint] iter=  600 (sample n=100x10) entropy=0.0166 greedy=15.60% stochastic=15.70% gap=+0.10% elapsed=34301s
+[checkpoint-saved] iter=600
+slurmstepd: error: *** JOB 30428693 ON c3cpu-a5-u34-4 CANCELLED AT 2026-07-25T11:44:24 ***

@@ -1,0 +1,6 @@
+array_index=20 -> tier=hard, encoder=relational, seed=0
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[start] run_tag=hard_relational_seed0 start_iteration=0 n_iterations=3000 entropy_coef=0.01 commit=3f465e0fb5ef34405dd42804c112fb5eb0df9a97
+[checkpoint] iter=  300 (sample n=100x10) entropy=0.0572 greedy=11.20% stochastic=11.60% gap=+0.40% elapsed=43845s
+[checkpoint-saved] iter=300
+slurmstepd: error: *** JOB 30428789 ON c3cpu-a5-u5-3 CANCELLED AT 2026-07-25T11:44:24 ***

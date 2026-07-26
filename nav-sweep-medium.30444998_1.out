@@ -1,0 +1,9 @@
+array_index=1 -> tier=medium, encoder=hrep, seed=1
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[resume] medium_hrep_seed1 loaded checkpoint at iteration=2400, episode_count=39904, train_sim_violations=0
+[start] run_tag=medium_hrep_seed1 start_iteration=2400 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter= 2700 (FULL n=175x30) entropy=1.8035 greedy=28.82% stochastic=40.10% gap=+11.28% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=8117s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=175x30) entropy=1.7830 greedy=23.77% stochastic=42.19% gap=+18.42% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=16309s
+[checkpoint-saved] iter=3000
+[done] run_tag=medium_hrep_seed1 wrote sweep_results/medium_hrep_seed1.json (greedy=23.77%, stochastic=42.19%, train_sim_violations=0, final_eval_sim_violations=0)

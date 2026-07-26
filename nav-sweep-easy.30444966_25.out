@@ -1,0 +1,3 @@
+array_index=25 -> tier=easy, encoder=gnn, seed=0
+[pool] tier=easy n_train=812 n_test=203 train_fp=5273f45be21869b2 test_fp=601ae1a38f60f29f
+[done] easy_gnn_seed0 already complete -- sweep_results/easy_gnn_seed0.json exists, nothing to do

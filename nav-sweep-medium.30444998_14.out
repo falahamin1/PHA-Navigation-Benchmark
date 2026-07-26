@@ -1,0 +1,3 @@
+array_index=14 -> tier=medium, encoder=mlp, seed=4
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[done] medium_mlp_seed4 already complete -- sweep_results/medium_mlp_seed4.json exists, nothing to do

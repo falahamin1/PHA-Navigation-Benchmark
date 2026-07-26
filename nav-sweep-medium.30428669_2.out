@@ -1,0 +1,23 @@
+array_index=2 -> tier=medium, encoder=hrep, seed=2
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[start] run_tag=medium_hrep_seed2 start_iteration=0 n_iterations=3000 entropy_coef=0.01 commit=3f465e0fb5ef34405dd42804c112fb5eb0df9a97
+[checkpoint] iter=  300 (sample n=100x10) entropy=0.4227 greedy=15.00% stochastic=18.60% gap=+3.60% elapsed=5346s
+[checkpoint-saved] iter=300
+[checkpoint] iter=  600 (sample n=100x10) entropy=0.1423 greedy=15.00% stochastic=16.40% gap=+1.40% elapsed=10011s
+[checkpoint-saved] iter=600
+[checkpoint] iter=  900 (sample n=100x10) entropy=1.7315 greedy=13.60% stochastic=30.60% gap=+17.00% elapsed=15055s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=1.9379 greedy=20.20% stochastic=29.60% gap=+9.40% elapsed=19915s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=1.9183 greedy=13.80% stochastic=31.70% gap=+17.90% elapsed=25076s
+[checkpoint-saved] iter=1500
+Traceback (most recent call last):
+  File "/projects/amfa5003/PHA-Navigation-Benchmark/envs/sweep_cluster.py", line 373, in <module>
+    main()
+  File "/projects/amfa5003/PHA-Navigation-Benchmark/envs/sweep_cluster.py", line 368, in main
+    run(tier, encoder, seed, args.output_dir, n_iterations=args.n_iterations,
+  File "/projects/amfa5003/PHA-Navigation-Benchmark/envs/sweep_cluster.py", line 207, in run
+    obs, reward, terminated, truncated, info = env.step(int(action.item()))
+  File "/projects/amfa5003/PHA-Navigation-Benchmark/envs/nav_env.py", line 245, in step
+    assert self.partition.neighbors_adjacent(self.cell, new_cell), (
+AssertionError: skipped-cell violation: 1 -> 6 not adjacent (substep displacement too large for this cell size; retune drift_coupling/dt)

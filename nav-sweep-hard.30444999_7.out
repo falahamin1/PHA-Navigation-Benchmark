@@ -1,0 +1,21 @@
+array_index=7 -> tier=hard, encoder=vrep, seed=2
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[resume] hard_vrep_seed2 loaded checkpoint at iteration=600, episode_count=6378, train_sim_violations=0
+[start] run_tag=hard_vrep_seed2 start_iteration=600 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter=  900 (sample n=100x10) entropy=0.4519 greedy=17.30% stochastic=25.10% gap=+7.80% sim_violations(train_cum=3, eval_this_ckpt=0) elapsed=9287s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=1.8915 greedy=15.80% stochastic=32.20% gap=+16.40% sim_violations(train_cum=10, eval_this_ckpt=17) elapsed=16173s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=1.9041 greedy=10.70% stochastic=33.20% gap=+22.50% sim_violations(train_cum=19, eval_this_ckpt=8) elapsed=23235s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=1.6135 greedy=23.50% stochastic=31.40% gap=+7.90% sim_violations(train_cum=24, eval_this_ckpt=14) elapsed=30286s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=1.8967 greedy=8.00% stochastic=33.70% gap=+25.70% sim_violations(train_cum=30, eval_this_ckpt=10) elapsed=36461s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.0373 greedy=19.00% stochastic=24.10% gap=+5.10% sim_violations(train_cum=35, eval_this_ckpt=20) elapsed=44257s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=168x30) entropy=0.7336 greedy=15.65% stochastic=21.45% gap=+5.79% sim_violations(train_cum=43, eval_this_ckpt=364) elapsed=53343s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=168x30) entropy=1.9672 greedy=15.48% stochastic=34.66% gap=+19.19% sim_violations(train_cum=48, eval_this_ckpt=26) elapsed=68608s
+[checkpoint-saved] iter=3000
+[done] run_tag=hard_vrep_seed2 wrote sweep_results/hard_vrep_seed2.json (greedy=15.48%, stochastic=34.66%, train_sim_violations=48, final_eval_sim_violations=26)

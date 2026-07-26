@@ -1,0 +1,23 @@
+array_index=5 -> tier=hard, encoder=vrep, seed=0
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[resume] hard_vrep_seed0 loaded checkpoint at iteration=300, episode_count=3612, train_sim_violations=0
+[start] run_tag=hard_vrep_seed0 start_iteration=300 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter=  600 (sample n=100x10) entropy=0.2001 greedy=16.70% stochastic=19.80% gap=+3.10% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=11144s
+[checkpoint-saved] iter=600
+[checkpoint] iter=  900 (sample n=100x10) entropy=0.0846 greedy=13.30% stochastic=13.50% gap=+0.20% sim_violations(train_cum=1, eval_this_ckpt=15) elapsed=21813s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=1.6870 greedy=12.40% stochastic=30.20% gap=+17.80% sim_violations(train_cum=4, eval_this_ckpt=11) elapsed=29466s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=0.8433 greedy=11.00% stochastic=18.20% gap=+7.20% sim_violations(train_cum=10, eval_this_ckpt=6) elapsed=41319s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=1.7302 greedy=18.50% stochastic=34.20% gap=+15.70% sim_violations(train_cum=16, eval_this_ckpt=2) elapsed=47736s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=1.7627 greedy=11.40% stochastic=30.50% gap=+19.10% sim_violations(train_cum=18, eval_this_ckpt=5) elapsed=55101s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.9330 greedy=13.20% stochastic=35.70% gap=+22.50% sim_violations(train_cum=20, eval_this_ckpt=5) elapsed=62281s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=168x30) entropy=1.8846 greedy=15.93% stochastic=33.15% gap=+17.22% sim_violations(train_cum=24, eval_this_ckpt=62) elapsed=72106s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=168x30) entropy=1.6032 greedy=27.74% stochastic=39.48% gap=+11.75% sim_violations(train_cum=31, eval_this_ckpt=40) elapsed=81943s
+[checkpoint-saved] iter=3000
+[done] run_tag=hard_vrep_seed0 wrote sweep_results/hard_vrep_seed0.json (greedy=27.74%, stochastic=39.48%, train_sim_violations=31, final_eval_sim_violations=40)

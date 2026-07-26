@@ -1,0 +1,17 @@
+array_index=9 -> tier=hard, encoder=vrep, seed=4
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[start] run_tag=hard_vrep_seed4 start_iteration=0 n_iterations=3000 entropy_coef=0.01 commit=3f465e0fb5ef34405dd42804c112fb5eb0df9a97
+[checkpoint] iter=  300 (sample n=100x10) entropy=0.0143 greedy=12.90% stochastic=13.20% gap=+0.30% elapsed=4873s
+[checkpoint-saved] iter=300
+[checkpoint] iter=  600 (sample n=100x10) entropy=0.0342 greedy=20.30% stochastic=20.20% gap=-0.10% elapsed=13762s
+[checkpoint-saved] iter=600
+Traceback (most recent call last):
+  File "/projects/amfa5003/PHA-Navigation-Benchmark/envs/sweep_cluster.py", line 373, in <module>
+    main()
+  File "/projects/amfa5003/PHA-Navigation-Benchmark/envs/sweep_cluster.py", line 368, in main
+    run(tier, encoder, seed, args.output_dir, n_iterations=args.n_iterations,
+  File "/projects/amfa5003/PHA-Navigation-Benchmark/envs/sweep_cluster.py", line 207, in run
+    obs, reward, terminated, truncated, info = env.step(int(action.item()))
+  File "/projects/amfa5003/PHA-Navigation-Benchmark/envs/nav_env.py", line 245, in step
+    assert self.partition.neighbors_adjacent(self.cell, new_cell), (
+AssertionError: skipped-cell violation: 28 -> 13 not adjacent (substep displacement too large for this cell size; retune drift_coupling/dt)

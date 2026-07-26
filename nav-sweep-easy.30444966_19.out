@@ -1,0 +1,3 @@
+array_index=19 -> tier=easy, encoder=cnn, seed=4
+[pool] tier=easy n_train=812 n_test=203 train_fp=5273f45be21869b2 test_fp=601ae1a38f60f29f
+[done] easy_cnn_seed4 already complete -- sweep_results/easy_cnn_seed4.json exists, nothing to do

@@ -1,0 +1,23 @@
+array_index=0 -> tier=medium, encoder=hrep, seed=0
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[resume] medium_hrep_seed0 loaded checkpoint at iteration=300, episode_count=2835, train_sim_violations=0
+[start] run_tag=medium_hrep_seed0 start_iteration=300 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter=  600 (sample n=100x10) entropy=0.6697 greedy=5.10% stochastic=12.50% gap=+7.40% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=6709s
+[checkpoint-saved] iter=600
+[checkpoint] iter=  900 (sample n=100x10) entropy=0.1616 greedy=8.20% stochastic=9.40% gap=+1.20% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=14080s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=0.1758 greedy=7.80% stochastic=8.40% gap=+0.60% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=21491s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=0.5172 greedy=7.80% stochastic=11.60% gap=+3.80% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=28622s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=0.7232 greedy=7.80% stochastic=17.20% gap=+9.40% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=35502s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=0.3749 greedy=7.80% stochastic=10.60% gap=+2.80% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=42789s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.2689 greedy=7.80% stochastic=22.90% gap=+15.10% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=49604s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=175x30) entropy=0.7211 greedy=8.82% stochastic=18.23% gap=+9.41% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=59802s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=175x30) entropy=0.3498 greedy=8.91% stochastic=11.85% gap=+2.93% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=72500s
+[checkpoint-saved] iter=3000
+[done] run_tag=medium_hrep_seed0 wrote sweep_results/medium_hrep_seed0.json (greedy=8.91%, stochastic=11.85%, train_sim_violations=0, final_eval_sim_violations=0)

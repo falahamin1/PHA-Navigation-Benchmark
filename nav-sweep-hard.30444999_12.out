@@ -1,0 +1,24 @@
+array_index=12 -> tier=hard, encoder=mlp, seed=2
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[start] run_tag=hard_mlp_seed2 start_iteration=0 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter=  300 (sample n=100x10) entropy=1.8995 greedy=11.40% stochastic=31.40% gap=+20.00% sim_violations(train_cum=12, eval_this_ckpt=34) elapsed=4684s
+[checkpoint-saved] iter=300
+[checkpoint] iter=  600 (sample n=100x10) entropy=1.4729 greedy=16.60% stochastic=27.30% gap=+10.70% sim_violations(train_cum=23, eval_this_ckpt=5) elapsed=9655s
+[checkpoint-saved] iter=600
+[checkpoint] iter=  900 (sample n=100x10) entropy=1.5706 greedy=17.10% stochastic=27.30% gap=+10.20% sim_violations(train_cum=32, eval_this_ckpt=4) elapsed=14560s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=1.3625 greedy=16.80% stochastic=22.40% gap=+5.60% sim_violations(train_cum=41, eval_this_ckpt=5) elapsed=19877s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=1.4407 greedy=13.10% stochastic=22.30% gap=+9.20% sim_violations(train_cum=50, eval_this_ckpt=2) elapsed=25435s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=1.6355 greedy=15.60% stochastic=25.10% gap=+9.50% sim_violations(train_cum=66, eval_this_ckpt=3) elapsed=30516s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=1.4105 greedy=14.40% stochastic=23.70% gap=+9.30% sim_violations(train_cum=74, eval_this_ckpt=0) elapsed=36112s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.2772 greedy=11.90% stochastic=24.30% gap=+12.40% sim_violations(train_cum=85, eval_this_ckpt=3) elapsed=41285s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=168x30) entropy=1.4785 greedy=15.62% stochastic=20.38% gap=+4.76% sim_violations(train_cum=90, eval_this_ckpt=102) elapsed=51443s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=168x30) entropy=1.2898 greedy=12.44% stochastic=19.33% gap=+6.88% sim_violations(train_cum=94, eval_this_ckpt=15) elapsed=62054s
+[checkpoint-saved] iter=3000
+[done] run_tag=hard_mlp_seed2 wrote sweep_results/hard_mlp_seed2.json (greedy=12.44%, stochastic=19.33%, train_sim_violations=94, final_eval_sim_violations=15)

@@ -1,0 +1,24 @@
+array_index=26 -> tier=hard, encoder=gnn, seed=1
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[start] run_tag=hard_gnn_seed1 start_iteration=0 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter=  300 (sample n=100x10) entropy=1.9594 greedy=20.80% stochastic=34.40% gap=+13.60% sim_violations(train_cum=6, eval_this_ckpt=11) elapsed=5043s
+[checkpoint-saved] iter=300
+[checkpoint] iter=  600 (sample n=100x10) entropy=1.8798 greedy=19.70% stochastic=33.70% gap=+14.00% sim_violations(train_cum=11, eval_this_ckpt=17) elapsed=9002s
+[checkpoint-saved] iter=600
+[checkpoint] iter=  900 (sample n=100x10) entropy=1.9454 greedy=20.30% stochastic=33.60% gap=+13.30% sim_violations(train_cum=18, eval_this_ckpt=13) elapsed=13815s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=1.9117 greedy=12.40% stochastic=31.80% gap=+19.40% sim_violations(train_cum=24, eval_this_ckpt=16) elapsed=18319s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=1.8568 greedy=21.30% stochastic=33.00% gap=+11.70% sim_violations(train_cum=34, eval_this_ckpt=16) elapsed=23362s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=1.7156 greedy=15.70% stochastic=32.00% gap=+16.30% sim_violations(train_cum=38, eval_this_ckpt=26) elapsed=28242s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=1.6474 greedy=19.90% stochastic=29.40% gap=+9.50% sim_violations(train_cum=40, eval_this_ckpt=80) elapsed=33383s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.5863 greedy=17.50% stochastic=27.80% gap=+10.30% sim_violations(train_cum=42, eval_this_ckpt=81) elapsed=38177s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=168x30) entropy=1.6938 greedy=14.94% stochastic=28.63% gap=+13.69% sim_violations(train_cum=45, eval_this_ckpt=123) elapsed=50748s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=168x30) entropy=1.8516 greedy=21.05% stochastic=36.75% gap=+15.69% sim_violations(train_cum=49, eval_this_ckpt=148) elapsed=59621s
+[checkpoint-saved] iter=3000
+[done] run_tag=hard_gnn_seed1 wrote sweep_results/hard_gnn_seed1.json (greedy=21.05%, stochastic=36.75%, train_sim_violations=49, final_eval_sim_violations=148)

@@ -1,0 +1,8 @@
+array_index=23 -> tier=hard, encoder=relational, seed=3
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[start] run_tag=hard_relational_seed3 start_iteration=0 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter=  300 (sample n=100x10) entropy=0.3841 greedy=17.10% stochastic=27.10% gap=+10.00% sim_violations(train_cum=3, eval_this_ckpt=2) elapsed=37370s
+[checkpoint-saved] iter=300
+[checkpoint] iter=  600 (sample n=100x10) entropy=0.4530 greedy=11.20% stochastic=17.60% gap=+6.40% sim_violations(train_cum=6, eval_this_ckpt=3) elapsed=78639s
+[checkpoint-saved] iter=600
+slurmstepd: error: *** JOB 30445056 ON c3cpu-a9-u11-2 CANCELLED AT 2026-07-26T11:51:08 DUE TO TIME LIMIT ***

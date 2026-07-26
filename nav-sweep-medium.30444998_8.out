@@ -1,0 +1,9 @@
+array_index=8 -> tier=medium, encoder=vrep, seed=3
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[resume] medium_vrep_seed3 loaded checkpoint at iteration=2400, episode_count=22556, train_sim_violations=0
+[start] run_tag=medium_vrep_seed3 start_iteration=2400 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter= 2700 (FULL n=175x30) entropy=0.2395 greedy=7.56% stochastic=8.27% gap=+0.70% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=11828s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=175x30) entropy=0.6257 greedy=7.43% stochastic=10.34% gap=+2.91% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=21928s
+[checkpoint-saved] iter=3000
+[done] run_tag=medium_vrep_seed3 wrote sweep_results/medium_vrep_seed3.json (greedy=7.43%, stochastic=10.34%, train_sim_violations=0, final_eval_sim_violations=0)

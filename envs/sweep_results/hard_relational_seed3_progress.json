@@ -1,0 +1,41 @@
+{
+  "iteration": [
+    300,
+    600
+  ],
+  "entropy": [
+    0.3841492831707001,
+    0.45298492908477783
+  ],
+  "greedy_solve": [
+    0.171,
+    0.11199999999999999
+  ],
+  "stochastic_solve": [
+    0.271,
+    0.17600000000000002
+  ],
+  "n_eval_instances": [
+    100,
+    100
+  ],
+  "elapsed_s": [
+    37369.73167228699,
+    78639.30755329132
+  ],
+  "train_sim_violations": [
+    3,
+    6
+  ],
+  "eval_sim_violations": [
+    2,
+    3
+  ],
+  "pool_provenance": {
+    "tier": "hard",
+    "n_train": 694,
+    "n_test": 168,
+    "train_fingerprint": "764cc4977f8b6665",
+    "test_fingerprint": "9516aee04fea91a8"
+  }
+}

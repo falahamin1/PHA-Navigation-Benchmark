@@ -1,0 +1,21 @@
+array_index=13 -> tier=medium, encoder=mlp, seed=3
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[resume] medium_mlp_seed3 loaded checkpoint at iteration=600, episode_count=11143, train_sim_violations=0
+[start] run_tag=medium_mlp_seed3 start_iteration=600 n_iterations=3000 entropy_coef=0.01 commit=68fb953cf6ed58a047dd9cf9da4254bfbcfc0963
+[checkpoint] iter=  900 (sample n=100x10) entropy=1.8641 greedy=18.10% stochastic=29.40% gap=+11.30% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=3207s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=1.8590 greedy=16.10% stochastic=26.30% gap=+10.20% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=6479s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=1.8859 greedy=19.70% stochastic=30.70% gap=+11.00% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=9582s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=1.7254 greedy=19.20% stochastic=29.00% gap=+9.80% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=12786s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=1.4784 greedy=12.60% stochastic=24.20% gap=+11.60% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=16551s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.6002 greedy=14.70% stochastic=26.00% gap=+11.30% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=19947s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=175x30) entropy=1.6115 greedy=15.58% stochastic=26.80% gap=+11.22% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=25585s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=175x30) entropy=1.7592 greedy=20.74% stochastic=27.05% gap=+6.30% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=31897s
+[checkpoint-saved] iter=3000
+[done] run_tag=medium_mlp_seed3 wrote sweep_results/medium_mlp_seed3.json (greedy=20.74%, stochastic=27.05%, train_sim_violations=0, final_eval_sim_violations=0)
