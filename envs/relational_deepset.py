@@ -57,7 +57,7 @@ computing this feature more than once per forward pass in a way that lets
 information compound across hops.
 """
 
-from typing import Optional
+from typing import Dict, Optional
 
 import torch
 import torch.nn as nn
@@ -135,6 +135,19 @@ class RelationalDeepSet(nn.Module):
         self.cell_mlp = nn.Sequential(nn.Linear(cell_input_dim, cell_hidden), nn.ReLU())
         self.head = nn.Sequential(nn.Linear(cell_hidden + AGENT_STATE_DIM, embedding_dim), nn.ReLU())
 
+        # compute_cell_relational_features(partition, instance) is fixed for
+        # the lifetime of an instance (it depends on partition geometry and
+        # instance.hazard_cells/goal_cell only -- never on current_cell or
+        # continuous state), so rebuilding it from scratch on every forward
+        # call is pure waste. Same cache-key shape as fairness_harness.py's
+        # _RegionGraphGNNAdapter._cache_key -- content-based, not id()-based,
+        # for the same reason pool.py's strict-adjacency cache had to move
+        # off id() (see that module's docstring).
+        self._relational_feature_cache: Dict[tuple, torch.Tensor] = {}
+
+    def _cache_key(self, partition, instance):
+        return (type(partition).__name__, getattr(partition, "grid_seed", None), partition.num_cells, instance)
+
     def _masked_pool(self, x: torch.Tensor, mask: torch.Tensor) -> torch.Tensor:
         mask_f = mask.unsqueeze(-1).to(x.dtype)
         if self.pool_type == "sum":
@@ -148,7 +161,11 @@ class RelationalDeepSet(nn.Module):
 
     def encode_region(self, partition, instance, current_cell: Optional[int] = None) -> torch.Tensor:
         hazard_set = set(instance.hazard_cells)
-        relational = compute_cell_relational_features(partition, instance)  # (num_cells, 5)
+        key = self._cache_key(partition, instance)
+        relational = self._relational_feature_cache.get(key)
+        if relational is None:
+            relational = compute_cell_relational_features(partition, instance)  # (num_cells, 5)
+            self._relational_feature_cache[key] = relational
 
         cell_descriptors = []
         for cell_idx in range(partition.num_cells):
