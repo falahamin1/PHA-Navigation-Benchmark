@@ -1,0 +1,15 @@
+array_index=21 -> tier=medium, encoder=relational, seed=1
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[resume] medium_relational_seed1 loaded checkpoint at iteration=1500, episode_count=14025, train_sim_violations=0
+[start] run_tag=medium_relational_seed1 start_iteration=1500 n_iterations=3000 entropy_coef=0.01 commit=26506059d307e53784ef4b44c03768fa7e000522
+[checkpoint] iter= 1800 (sample n=100x10) entropy=0.6027 greedy=12.50% stochastic=13.80% gap=+1.30% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=6706s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=0.5400 greedy=14.60% stochastic=15.50% gap=+0.90% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=13664s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.4544 greedy=25.80% stochastic=37.80% gap=+12.00% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=19725s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=175x30) entropy=1.4589 greedy=21.05% stochastic=31.68% gap=+10.63% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=29346s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=175x30) entropy=1.7670 greedy=35.83% stochastic=43.64% gap=+7.81% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=37698s
+[checkpoint-saved] iter=3000
+[done] run_tag=medium_relational_seed1 wrote sweep_results/medium_relational_seed1.json (greedy=35.83%, stochastic=43.64%, train_sim_violations=0, final_eval_sim_violations=0)

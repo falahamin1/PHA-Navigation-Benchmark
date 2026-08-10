@@ -1,0 +1,7 @@
+array_index=1 -> tier=hard, encoder=hrep, seed=1
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[resume] hard_hrep_seed1 loaded checkpoint at iteration=2700, episode_count=43865, train_sim_violations=47
+[start] run_tag=hard_hrep_seed1 start_iteration=2700 n_iterations=3000 entropy_coef=0.01 commit=26506059d307e53784ef4b44c03768fa7e000522
+[checkpoint] iter= 3000 (FULL n=168x30) entropy=1.6013 greedy=21.90% stochastic=40.52% gap=+18.61% sim_violations(train_cum=51, eval_this_ckpt=89) elapsed=13089s
+[checkpoint-saved] iter=3000
+[done] run_tag=hard_hrep_seed1 wrote sweep_results/hard_hrep_seed1.json (greedy=21.90%, stochastic=40.52%, train_sim_violations=51, final_eval_sim_violations=89)

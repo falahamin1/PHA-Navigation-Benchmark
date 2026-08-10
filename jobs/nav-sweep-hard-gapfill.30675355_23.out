@@ -1,0 +1,21 @@
+array_index=23 -> tier=hard, encoder=relational, seed=3
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[resume] hard_relational_seed3 loaded checkpoint at iteration=600, episode_count=7638, train_sim_violations=6
+[start] run_tag=hard_relational_seed3 start_iteration=600 n_iterations=3000 entropy_coef=0.01 commit=26506059d307e53784ef4b44c03768fa7e000522
+[checkpoint] iter=  900 (sample n=100x10) entropy=1.2055 greedy=18.80% stochastic=30.80% gap=+12.00% sim_violations(train_cum=8, eval_this_ckpt=9) elapsed=9202s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=1.6999 greedy=21.80% stochastic=34.10% gap=+12.30% sim_violations(train_cum=17, eval_this_ckpt=26) elapsed=16480s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=1.2793 greedy=23.30% stochastic=39.40% gap=+16.10% sim_violations(train_cum=27, eval_this_ckpt=11) elapsed=25027s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=1.5627 greedy=23.10% stochastic=40.80% gap=+17.70% sim_violations(train_cum=40, eval_this_ckpt=21) elapsed=33419s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=1.4168 greedy=29.00% stochastic=43.30% gap=+14.30% sim_violations(train_cum=63, eval_this_ckpt=23) elapsed=41271s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.5720 greedy=31.80% stochastic=44.90% gap=+13.10% sim_violations(train_cum=71, eval_this_ckpt=30) elapsed=48963s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=168x30) entropy=1.5139 greedy=42.54% stochastic=54.44% gap=+11.90% sim_violations(train_cum=85, eval_this_ckpt=78) elapsed=61946s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=168x30) entropy=1.4192 greedy=41.79% stochastic=58.69% gap=+16.90% sim_violations(train_cum=92, eval_this_ckpt=124) elapsed=74752s
+[checkpoint-saved] iter=3000
+[done] run_tag=hard_relational_seed3 wrote sweep_results/hard_relational_seed3.json (greedy=41.79%, stochastic=58.69%, train_sim_violations=92, final_eval_sim_violations=124)

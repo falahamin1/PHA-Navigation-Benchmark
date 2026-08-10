@@ -1,0 +1,11 @@
+array_index=20 -> tier=easy, encoder=relational, seed=0
+[pool] tier=easy n_train=812 n_test=203 train_fp=5273f45be21869b2 test_fp=601ae1a38f60f29f
+[resume] easy_relational_seed0 loaded checkpoint at iteration=2100, episode_count=27192, train_sim_violations=0
+[start] run_tag=easy_relational_seed0 start_iteration=2100 n_iterations=3000 entropy_coef=0.01 commit=26506059d307e53784ef4b44c03768fa7e000522
+[checkpoint] iter= 2400 (sample n=100x10) entropy=1.1661 greedy=36.00% stochastic=49.10% gap=+13.10% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=4638s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=203x30) entropy=1.3682 greedy=41.90% stochastic=50.28% gap=+8.37% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=10606s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=203x30) entropy=0.9160 greedy=50.15% stochastic=61.72% gap=+11.58% sim_violations(train_cum=0, eval_this_ckpt=0) elapsed=16457s
+[checkpoint-saved] iter=3000
+[done] run_tag=easy_relational_seed0 wrote sweep_results/easy_relational_seed0.json (greedy=50.15%, stochastic=61.72%, train_sim_violations=0, final_eval_sim_violations=0)

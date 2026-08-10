@@ -1,0 +1,23 @@
+array_index=24 -> tier=hard, encoder=relational, seed=4
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[resume] hard_relational_seed4 loaded checkpoint at iteration=300, episode_count=3216, train_sim_violations=0
+[start] run_tag=hard_relational_seed4 start_iteration=300 n_iterations=3000 entropy_coef=0.01 commit=26506059d307e53784ef4b44c03768fa7e000522
+[checkpoint] iter=  600 (sample n=100x10) entropy=0.1012 greedy=13.10% stochastic=13.80% gap=+0.70% sim_violations(train_cum=0, eval_this_ckpt=56) elapsed=12998s
+[checkpoint-saved] iter=600
+[checkpoint] iter=  900 (sample n=100x10) entropy=0.3377 greedy=12.70% stochastic=17.70% gap=+5.00% sim_violations(train_cum=0, eval_this_ckpt=27) elapsed=25463s
+[checkpoint-saved] iter=900
+[checkpoint] iter= 1200 (sample n=100x10) entropy=0.0919 greedy=13.10% stochastic=14.00% gap=+0.90% sim_violations(train_cum=0, eval_this_ckpt=66) elapsed=38471s
+[checkpoint-saved] iter=1200
+[checkpoint] iter= 1500 (sample n=100x10) entropy=0.2928 greedy=13.30% stochastic=17.30% gap=+4.00% sim_violations(train_cum=0, eval_this_ckpt=22) elapsed=51404s
+[checkpoint-saved] iter=1500
+[checkpoint] iter= 1800 (sample n=100x10) entropy=0.2740 greedy=12.10% stochastic=18.50% gap=+6.40% sim_violations(train_cum=0, eval_this_ckpt=58) elapsed=63072s
+[checkpoint-saved] iter=1800
+[checkpoint] iter= 2100 (sample n=100x10) entropy=1.4182 greedy=19.10% stochastic=41.00% gap=+21.90% sim_violations(train_cum=2, eval_this_ckpt=38) elapsed=72642s
+[checkpoint-saved] iter=2100
+[checkpoint] iter= 2400 (sample n=100x10) entropy=0.8513 greedy=23.70% stochastic=43.80% gap=+20.10% sim_violations(train_cum=8, eval_this_ckpt=44) elapsed=80315s
+[checkpoint-saved] iter=2400
+[checkpoint] iter= 2700 (FULL n=168x30) entropy=1.6477 greedy=24.58% stochastic=42.68% gap=+18.10% sim_violations(train_cum=15, eval_this_ckpt=174) elapsed=93249s
+[checkpoint-saved] iter=2700
+[checkpoint] iter= 3000 (FULL n=168x30) entropy=1.5291 greedy=24.50% stochastic=42.78% gap=+18.27% sim_violations(train_cum=19, eval_this_ckpt=103) elapsed=110302s
+[checkpoint-saved] iter=3000
+[done] run_tag=hard_relational_seed4 wrote sweep_results/hard_relational_seed4.json (greedy=24.50%, stochastic=42.78%, train_sim_violations=19, final_eval_sim_violations=103)
