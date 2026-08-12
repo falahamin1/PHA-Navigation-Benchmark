@@ -209,6 +209,84 @@ with a high `train_sim_violations`/`final_eval_sim_violations` relative to
 its training length or eval sample size when handing off to the statistics
 module.
 
+## B0e -- protocol-matched chance baseline (evaluation only, no training)
+
+Diagnosis follow-up, not part of the sweep proper. Answers: is a given
+(tier, encoder)'s trained solve rate actually above chance, on the SAME
+protocol (same fixed 100-instance subsample, same 10 resets, same eval
+code path) the plateau values and Stage A's interval-protocol curves were
+measured on -- rather than against an untrained baseline measured under a
+different, unmatched protocol (see the B0e task spec's own account of why
+the first attempt at this, at 3 resets under no fixed protocol, was
+reopened).
+
+**Code**: `envs/b0e_array_task.py` (one array task per (tier, encoder,
+seed) -- reuses `launch_reduced_sweep.index_to_run`'s exact bijection, so
+`--array=0-29` per tier means the same thing it already does for
+`nav-sweep-*.slurm`). Each task computes, under the interval protocol
+(`np.random.default_rng(999)`'s fixed 100-instance subsample, 10 resets,
+both eval modes, reusing `fairness_harness._evaluate` verbatim -- no new
+eval logic):
+
+- an untrained baseline (`torch.manual_seed(seed)`, fresh encoder weights
+  -- the same seed already used to train that cell, not a new enumeration)
+- a re-evaluation of that cell's existing final checkpoint
+  (`sweep_results/<tier>_<encoder>_seed<seed>_checkpoint.pt` -- must
+  already exist from the Stage A/B sweep; this job trains nothing)
+
+Horizon is capped at 15 for EASY/MEDIUM (empirically lossless -- verified
+locally before submission and again per-task via each output's
+`self_check` field) and left at the frozen 40 for HARD (no cap below 40
+was lossless for HARD's untrained baseline). The SAME horizon is used for
+the baseline and the checkpoint within a tier, since a mismatched horizon
+between the two sides would reintroduce exactly the kind of protocol
+seam this job exists to eliminate.
+
+Writes `sweep_results_b0e/<tier>_<encoder>_seed<seed>_b0e.json` -- a NEW
+directory; `sweep_results/*.json` is read-only to this job.
+
+### Submit
+
+```bash
+sbatch jobs/b0e-easy.slurm
+sbatch jobs/b0e-medium.slurm
+sbatch jobs/b0e-hard.slurm
+```
+
+Same preconditions as every job above: run `acompile` first (this bites
+`sbatch` specifically, not just interactive `module load` -- see the top
+of this file), edit `WORK_DIR` if needed, confirm the checkpoints these
+tasks read already exist on Alpine (copy `sweep_results/*_checkpoint.pt`
+and `sweep_results/<tag>.json` over if they don't -- this job cannot
+produce them, only read them).
+
+`--time` on all three is a rough estimate extrapolated from local
+(non-cluster, single-core) timing, not a cluster-measured number --
+EASY/MEDIUM at 1h, HARD at 4h (HARD's untrained-baseline eval is
+substantially slower even after the horizon-cap analysis; see
+`jobs/b0e-hard.slurm`'s header). Watch the first array's actual wall time
+via `sacct` and tighten if it's overprovisioned.
+
+### Getting results back and aggregating
+
+Send back `sweep_results_b0e/*_b0e.json` (all 90). Then, from `envs/`:
+
+```bash
+python3 b0e_aggregate.py
+```
+
+This prints: the per-seed baseline table, a consistency check against the
+6 checkpoints Stage A's A1 already re-evaluated under this exact protocol
+(flags any that don't match), the matched comparison table (18 tier x
+encoder cells against their own baseline, both modes, points and
+baseline-std-units difference, 95%-CI-overlap flag), and the three
+specific questions the B0e task asks: whether CNN clears its own chance
+rate on HARD, whether chance differs meaningfully by encoder, and whether
+the interval-protocol ranking agrees with the full-protocol ranking
+already on record. `envs/test_b0e_aggregate.py` covers this script's
+math against hand-constructed fixtures; `envs/test_b0e_array_task.py`
+smoke-tests the per-task driver end-to-end against a real checkpoint.
+
 ## Step 5b full sweep (later, if the reduced sweep isn't enough)
 
 The 180-run array (6 encoders x 3 tiers x 10 seeds) is built and tested
