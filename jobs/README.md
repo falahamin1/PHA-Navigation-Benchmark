@@ -287,6 +287,55 @@ already on record. `envs/test_b0e_aggregate.py` covers this script's
 math against hand-constructed fixtures; `envs/test_b0e_array_task.py`
 smoke-tests the per-task driver end-to-end against a real checkpoint.
 
+## B3 -- convergence calibration (current)
+
+Resumes 6 existing Stage A/B checkpoints (H-Rep, Relational, CNN x HARD,
+EASY, all seed0 -- see `jobs/b3-extend.slurm`'s header for why seed0-
+everywhere and why EASY is in scope, not just HARD) from iteration 3000 to
+a 15,000-iteration ceiling. Rewrites the eval protocol to be seamless: the
+full held-out test set at 30 resets at EVERY checkpoint, not the cheap-
+sample-then-full-set switch the original sweep and B0e both used -- A1 and
+B0e both showed that switch changes a headline ranking (MEDIUM's #1
+encoder flips depending which side of it you read), so Stage D can't
+inherit it. Also logs B0a's argmax-invariance measure
+(`envs/argmax_invariance.py`) every checkpoint, not just as a one-shot
+diagnostic.
+
+**Code**: `envs/b3_extend_training.py` (one array task per (tier, encoder,
+seed0) cell, `--array-index` into its own `TARGET_RUNS` list -- there is no
+30-slot grid here, only 6 explicit runs). Reads
+`sweep_results/<tag>_checkpoint.pt` and `sweep_results/<tag>.json`
+read-only (never writes there); writes
+`sweep_results_b3/<tag>_b3_checkpoint.pt`, `_b3_progress.json`, and (on
+reaching 15,000) `_b3.json`. Idempotent and resumable, same contract as
+`sweep_cluster.py` -- safe to resubmit.
+
+### Submit
+
+```bash
+sbatch jobs/b3-extend.slurm
+```
+
+Same preconditions as every job above (`acompile` first, `WORK_DIR`,
+confirm the 6 target checkpoints already exist locally on Alpine -- this
+job cannot produce them, only extend them).
+
+**Budget is genuinely uncertain and likely tight** -- see
+`jobs/b3-extend.slurm`'s header for the full math (local, non-Alpine
+timing extrapolates HARD training alone to ~67h before eval, plus
+~14-18h of full-protocol eval at `--eval-every 1000`). Expect HARD tasks
+especially to need at least one resubmission; that's an accepted outcome
+of this design, not a failure -- just resubmit the same script.
+
+### Getting results back
+
+Send back `sweep_results_b3/*_b3.json` and `*_b3_progress.json` (progress
+files matter here even for incomplete runs -- the report this stage
+produces is a per-encoder curve, not just an endpoint, so a task that's
+still mid-run at iteration 9000 when you need to check in is still useful
+data, unlike the original sweep's "don't interpret partial results"
+convention).
+
 ## Step 5b full sweep (later, if the reduced sweep isn't enough)
 
 The 180-run array (6 encoders x 3 tiers x 10 seeds) is built and tested
