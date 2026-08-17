@@ -47,12 +47,14 @@
 # If eval is dominating wall-clock once real numbers are in, --eval-every
 # is the knob to raise (see jobs/README.md's existing note on this).
 #
-# *** QOS/PARTITION BELOW ARE UNVERIFIED -- CONFIRM AGAINST ALPINE BEFORE
-# SUBMITTING. *** Same caveat as nav-sweep-*-gapfill.slurm: --qos=long is a
-# guess at Alpine's naming (not confirmed from this environment, which has
-# no cluster access) -- check with `sacctmgr show qos -p` and correct
-# --qos/--partition if the name differs or long requires a different
-# partition than acpu.
+# QOS confirmed against Alpine (2026-08-17, first submission attempt):
+# --qos=long was wrong -- the acpu partition only accepts admin, cpu-normal,
+# or cpu-long. Same renamed-QOS pattern jobs/README.md already documents for
+# cpu-normal (Alpine's amilan/normal rename); cpu-long is evidently that
+# same rename applied to long. Fixed below to --qos=cpu-long. The original
+# nav-sweep-*-gapfill.slurm scripts still say --qos=long uncorrected -- same
+# bug, not fixed here since they're outside this task's scope, but worth
+# fixing before anyone submits those too.
 
 #SBATCH --nodes=1
 #SBATCH --time=72:00:00
@@ -63,7 +65,7 @@
 #SBATCH --array=0-5
 #SBATCH --job-name=b3-extend
 #SBATCH --output=b3-extend.%A_%a.out
-#SBATCH --qos=long
+#SBATCH --qos=cpu-long
 
 module purge
 module load anaconda
