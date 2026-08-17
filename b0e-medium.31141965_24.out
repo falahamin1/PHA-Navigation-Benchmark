@@ -1,0 +1,5 @@
+array_index=24 -> tier=medium, encoder=relational, seed=4
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[baseline] medium_relational_seed4 greedy=0.1410 stochastic=0.1560 self_check={'capped_rate': 0.1, 'uncapped_rate': 0.1, 'matched': True}
+[checkpoint] medium_relational_seed4 greedy=0.4040 stochastic=0.4360 self_check={'capped_rate': 0.35, 'uncapped_rate': 0.35, 'matched': True}
+[done] wrote sweep_results_b0e/medium_relational_seed4_b0e.json

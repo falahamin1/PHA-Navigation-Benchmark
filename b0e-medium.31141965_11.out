@@ -1,0 +1,5 @@
+array_index=11 -> tier=medium, encoder=mlp, seed=1
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[baseline] medium_mlp_seed1 greedy=0.1200 stochastic=0.2100 self_check={'capped_rate': 0.1, 'uncapped_rate': 0.2, 'matched': False}
+[checkpoint] medium_mlp_seed1 greedy=0.1900 stochastic=0.2330 self_check={'capped_rate': 0.2, 'uncapped_rate': 0.2, 'matched': True}
+[done] wrote sweep_results_b0e/medium_mlp_seed1_b0e.json

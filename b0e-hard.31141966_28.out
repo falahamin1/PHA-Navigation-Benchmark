@@ -1,0 +1,5 @@
+array_index=28 -> tier=hard, encoder=gnn, seed=3
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[baseline] hard_gnn_seed3 greedy=0.0870 stochastic=0.3050 self_check={'capped_rate': 0.1, 'uncapped_rate': 0.1, 'matched': True, 'skipped_redundant_uncapped_run': True}
+[checkpoint] hard_gnn_seed3 greedy=0.1350 stochastic=0.2850 self_check={'capped_rate': 0.15, 'uncapped_rate': 0.15, 'matched': True, 'skipped_redundant_uncapped_run': True}
+[done] wrote sweep_results_b0e/hard_gnn_seed3_b0e.json

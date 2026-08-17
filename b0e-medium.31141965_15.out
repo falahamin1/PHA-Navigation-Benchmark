@@ -1,0 +1,5 @@
+array_index=15 -> tier=medium, encoder=cnn, seed=0
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[baseline] medium_cnn_seed0 greedy=0.2500 stochastic=0.2240 self_check={'capped_rate': 0.35, 'uncapped_rate': 0.35, 'matched': True}
+[checkpoint] medium_cnn_seed0 greedy=0.2690 stochastic=0.3480 self_check={'capped_rate': 0.3, 'uncapped_rate': 0.3, 'matched': True}
+[done] wrote sweep_results_b0e/medium_cnn_seed0_b0e.json

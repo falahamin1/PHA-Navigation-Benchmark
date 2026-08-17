@@ -1,0 +1,39 @@
+{
+  "tier": "hard",
+  "encoder": "vrep",
+  "seed": 0,
+  "array_index": 5,
+  "horizon_used": 40,
+  "n_eval_instances": 100,
+  "n_resets": 10,
+  "eval_subsample_seed": 999,
+  "pool_provenance": {
+    "tier": "hard",
+    "n_train": 694,
+    "n_test": 168,
+    "train_fingerprint": "764cc4977f8b6665",
+    "test_fingerprint": "9516aee04fea91a8"
+  },
+  "baseline": {
+    "greedy_rate": 0.16699999999999998,
+    "stochastic_rate": 0.161,
+    "self_check": {
+      "capped_rate": 0.15,
+      "uncapped_rate": 0.15,
+      "matched": true,
+      "skipped_redundant_uncapped_run": true
+    }
+  },
+  "checkpoint": {
+    "greedy_rate": 0.30100000000000005,
+    "stochastic_rate": 0.42699999999999994,
+    "self_check": {
+      "capped_rate": 0.3,
+      "uncapped_rate": 0.3,
+      "matched": true,
+      "skipped_redundant_uncapped_run": true
+    },
+    "reported_full_protocol_greedy": 0.2773809523809524,
+    "reported_full_protocol_stochastic": 0.3948412698412699
+  }
+}

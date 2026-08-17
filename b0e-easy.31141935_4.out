@@ -1,0 +1,5 @@
+array_index=4 -> tier=easy, encoder=hrep, seed=4
+[pool] tier=easy n_train=812 n_test=203 train_fp=5273f45be21869b2 test_fp=601ae1a38f60f29f
+[baseline] easy_hrep_seed4 greedy=0.1790 stochastic=0.2000 self_check={'capped_rate': 0.1, 'uncapped_rate': 0.1, 'matched': True}
+[checkpoint] easy_hrep_seed4 greedy=0.4320 stochastic=0.4450 self_check={'capped_rate': 0.3, 'uncapped_rate': 0.3, 'matched': True}
+[done] wrote sweep_results_b0e/easy_hrep_seed4_b0e.json

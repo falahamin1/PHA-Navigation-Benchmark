@@ -1,0 +1,5 @@
+array_index=25 -> tier=easy, encoder=gnn, seed=0
+[pool] tier=easy n_train=812 n_test=203 train_fp=5273f45be21869b2 test_fp=601ae1a38f60f29f
+[baseline] easy_gnn_seed0 greedy=0.1930 stochastic=0.2400 self_check={'capped_rate': 0.05, 'uncapped_rate': 0.05, 'matched': True}
+[checkpoint] easy_gnn_seed0 greedy=0.4480 stochastic=0.3350 self_check={'capped_rate': 0.25, 'uncapped_rate': 0.25, 'matched': True}
+[done] wrote sweep_results_b0e/easy_gnn_seed0_b0e.json

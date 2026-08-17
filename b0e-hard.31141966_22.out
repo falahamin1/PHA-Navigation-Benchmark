@@ -1,0 +1,5 @@
+array_index=22 -> tier=hard, encoder=relational, seed=2
+[pool] tier=hard n_train=694 n_test=168 train_fp=764cc4977f8b6665 test_fp=9516aee04fea91a8
+[baseline] hard_relational_seed2 greedy=0.1270 stochastic=0.2130 self_check={'capped_rate': 0.1, 'uncapped_rate': 0.1, 'matched': True, 'skipped_redundant_uncapped_run': True}
+[checkpoint] hard_relational_seed2 greedy=0.3670 stochastic=0.5240 self_check={'capped_rate': 0.4, 'uncapped_rate': 0.4, 'matched': True, 'skipped_redundant_uncapped_run': True}
+[done] wrote sweep_results_b0e/hard_relational_seed2_b0e.json

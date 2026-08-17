@@ -1,0 +1,5 @@
+array_index=6 -> tier=medium, encoder=vrep, seed=1
+[pool] tier=medium n_train=708 n_test=175 train_fp=46cc988a095f337b test_fp=1c494eb02a001f06
+[baseline] medium_vrep_seed1 greedy=0.1820 stochastic=0.2010 self_check={'capped_rate': 0.1, 'uncapped_rate': 0.1, 'matched': True}
+[checkpoint] medium_vrep_seed1 greedy=0.2250 stochastic=0.2480 self_check={'capped_rate': 0.05, 'uncapped_rate': 0.1, 'matched': False}
+[done] wrote sweep_results_b0e/medium_vrep_seed1_b0e.json
